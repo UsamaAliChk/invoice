@@ -22,23 +22,25 @@ const [description,setdescription]=useState('')
 const [items,setitems]=useState([]);
 const [selectedMemberId,setselectedMemberId]=useState('');
 
-console.log(qty,price)
 const canAdd=description.length>0 && qty!==0 && price!==0;
 const isEnabled=canAdd && selectedMemberId!==''
 
-console.log(canAdd, description.length>0,qty!==0, price!==0)
 
-const handelDelete=(index)=>{
+
+const handelDelete=async(index)=>{
+//  console.log("index is ",index)
+  let Total=totalPrice;
      let data=[]
      for(let i=0;i<items.length;i++){
        if(i===index){
-          totalPrice=totalPrice-items[i].price
-          settotal(totalPrice)
+          Total=Total-items[i].total
+          await settotalPrice(Total)
+          continue;
        }
-       else(i!=index)
+       else
         data.push(items[i])
      }
-     setitems(data)
+     await setitems(data)
 }
 
 
@@ -186,7 +188,7 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                             <Form.Control defaultValue={e.total} disabled></Form.Control>
                           </Col>
                           <Col md="1">
-                              <Button variant="danger" id={i} onClick={e=>{handelDelete(e.target.id)}} >DELETE</Button>
+                              <Button variant="danger" id={i} onClick={e=>{handelDelete(parseInt(e.target.id))}} >DELETE</Button>
                           </Col>
                         </Row>
                     </div>
@@ -222,11 +224,11 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                     <Form.Control type="text" onChange={(e)=>{let value=parseInt(e.target.value) ;setprice(value)}}></Form.Control>
                 </Col>
                 <Col md="1">
-                    <Button style={{marginTop:"30px"}} onClick={e=>{let total=qty*price;let total2=totalPrice+total;settotalPrice(total2); setitems(old=>[...old,{description,qty,price,total}])}} disabled={!canAdd}>ADD</Button>
+                    <Button style={{marginTop:"30px",color:"black"}} onClick={e=>{let total=qty*price;let total2=totalPrice+total;settotalPrice(total2); setitems(old=>[...old,{description,qty,price,total}])}} disabled={!canAdd}>ADD</Button>
                 </Col>
               </Row>
               <Row>
-                <Link to='typography'><Button style={{marginTop:"20px",marginLeft:"15px"}} onClick={handelClick} disabled={!isEnabled}>CREATE</Button></Link>
+                <Link to='typography'><Button style={{marginTop:"20px",marginLeft:"15px",color:'black'}} onClick={handelClick} disabled={!isEnabled}>CREATE</Button></Link>
               </Row>
             </Form>
           </Col>
