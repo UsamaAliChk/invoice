@@ -72,7 +72,7 @@ const dispatch=useDispatch()
   const getCompanies=async()=>{
     dispatch(setCompany([]))
     const data= await axios
-      .get("http://localhost:5000/companies")
+      .get("https://34.207.140.115:3000/companies")
       .then(res => {console.log(res.data); return res.data})
       .catch(err => console.error(err));
       setcompnies(data);
