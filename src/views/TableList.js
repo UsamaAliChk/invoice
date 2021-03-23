@@ -72,7 +72,7 @@ const dispatch=useDispatch()
   const getCompanies=async()=>{
     dispatch(setCompany([]))
     const data= await axios
-      .get("https://34.207.140.115:3000/companies")
+      .get("http://localhost:5000/companies")
       .then(res => {console.log(res.data); return res.data})
       .catch(err => console.error(err));
       setcompnies(data);
@@ -136,7 +136,7 @@ const dispatch=useDispatch()
                       companies.map(e=>{
                         return (
                           <tr>
-                            <td><img src={Image1} style={{height:"50px",width:"50px"}} /></td>
+                            <td><img src={e.logoUrl} style={{height:"50px",width:"50px"}} /></td>
                             <td ><Link to={'user'} onClick={e1=>{handelClick(e.companyId)}} style={{textTransform:'uppercase'}}>{e.companyName}</Link></td>
                             <td>{e.companyEmail}</td>
                             <td style={{textTransform:'uppercase'}}>{e.Country}</td>
@@ -149,7 +149,7 @@ const dispatch=useDispatch()
               </Card.Body>
             </Card>
           </Col>
-          <Col md="12">
+          {/* <Col md="12">
             <Card className="card-plain table-plain-bg">
               <Card.Header>
                 <Card.Title as="h4">Table on Plain Background</Card.Title>
@@ -215,7 +215,7 @@ const dispatch=useDispatch()
                 </Table>
               </Card.Body>
             </Card>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
 }

@@ -5,7 +5,7 @@ import Image3 from '../Logos/3.jpeg'
 import Image4 from '../Logos/4.jpeg'
 import Image5 from '../Logos/5.jpeg'
 import Image6 from '../Logos/6.jpeg'
-import invoice from '../Logos/7.jpeg'
+import invoice from '../Logos/invoice1.png'
 import {Link} from 'react-router-dom'
 import BigLoad from '../components/BigLoad'
 // react-bootstrap components
@@ -186,8 +186,7 @@ function User() {
                 <img
                   alt="..."
                   src={
-                    require("assets/img/photo-1431578500526-4d9613015464.jpeg")
-                      .default
+                    "https://crm-companies-logos.s3.amazonaws.com/background.jpeg"
                   }
                 ></img>
               </div>
@@ -197,7 +196,7 @@ function User() {
                     <img
                       alt="..."
                       className="avatar border-gray"
-                      src={Image1}
+                      src={data[0].logoUrl}
                     ></img>
                     <h5 className="title">SAMWAYS</h5>
                   </a>
@@ -289,11 +288,11 @@ function User() {
               <Col md="4">
                 <Row>
                 <div>
-                <img src={invoice} style={{height:"360px",width:"330px"}}/>
+                <img src={invoice} style={{height:"300px",width:"380px",marginLeft:'15px',marginTop:'-120px'}}/>
                 </div>
                 </Row>
                 <Row>
-                <Link to={"maps"}><Button style={{marginLeft:"15px",width:"230px"}}>GENERATE INVOICE</Button></Link>
+                <Link to={"maps"}><Button style={{marginLeft:"20px",width:"370px",marginTop:'20px'}}>GENERATE INVOICE</Button></Link>
                 </Row>
               
               </Col>
