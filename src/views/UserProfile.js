@@ -288,11 +288,11 @@ function User() {
               <Col md="4">
                 <Row>
                 <div>
-                <img src={invoice} style={{height:"300px",width:"310px",marginLeft:'10px',marginTop:'-120px'}}/>
+                <img src={invoice} style={{height:"300px",width:"330px",marginLeft:'10px',marginTop:'-120px'}}/>
                 </div>
                 </Row>
                 <Row>
-                <Link to={"maps"}><Button style={{marginLeft:"15px",width:"300px",marginTop:'20px'}}>GENERATE INVOICE</Button></Link>
+                <Link to={"maps"}><Button style={{marginLeft:"15px",width:"320px",marginTop:'20px'}}>GENERATE INVOICE</Button></Link>
                 </Row>
               
               </Col>
