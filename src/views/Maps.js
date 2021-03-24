@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import {setData} from '../redux/action/index'
 import {useDispatch,useSelector} from 'react-redux'
 import axios from 'axios';
@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import Loader  from 'react-loader-spinner'
 
 function Maps() {
+  const [Caddress,setCaddress]=useState([]);
   const contacts=useSelector(state=>state.getContacts)
   const selectedCompany=useSelector(state=>state.getCompany)
   const dispatch=useDispatch();
@@ -26,6 +27,27 @@ const canAdd=description.length>0 && qty!==0 && price!==0;
 const isEnabled=canAdd && selectedMemberId!==''
 
 
+useEffect(()=>{
+  console.log(selectedCompany)
+  let companyAddress=[]
+  if(selectedCompany[0].Address1!==null){
+    companyAddress.push(selectedCompany[0].Address1);
+  }
+  if(selectedCompany[0].Address2!==null){
+    companyAddress.push(selectedCompany[0].Address2);
+  }
+  if(selectedCompany[0].Address3!==null){
+    companyAddress.push(selectedCompany[0].Address3);
+  }
+  if(selectedCompany[0].Address4!==null){
+    companyAddress.push(selectedCompany[0].Address4);
+  }
+  setCaddress(companyAddress);
+  console.log("ADDRESS===",Caddress);
+})
+
+console.log("Hello Usama Ali Khan")
+console.log(selectedCompany);
 
 const handelDelete=async(index)=>{
 //  console.log("index is ",index)
@@ -91,7 +113,7 @@ const handelClick=()=>{
   }
  
   axios
-    .post("http://localhost:5000/invoice",{items,totalPrice,contactCompanyName,Name})
+    .post("https://spiretechs.co.uk:3000/invoice",{items,totalPrice,contactCompanyName,Name})
     .then(res => console.log(res))
     .catch(err => console.error(err));
 let billing={Name,phoneNumber,address,contactCompanyName,Email,id}
@@ -120,20 +142,33 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                       }
                   </Form.Control>
                 </Form.Group>
-                </Col>
-                <Col md="4">
-                <Form.Label>Address</Form.Label>
+                
+                </Col></Row>
+                
+
+                      <Row>
+                      {
+                  Caddress.map((e,i)=>{
+                    return(
+                      <Col md="4">
+                <Form.Label>Address {i+1}</Form.Label>
                 <Form.Control
-                defaultValue="ABC CHAKWAL"
+                defaultValue={e}
                 disabled
                 type="text"
                 >
                 </Form.Control>
                 </Col>
+                    )
+                  })
+                }
+                      </Row>
+
+                  <Row style={{marginTop:"20px"}}>
                 <Col md="4">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
-                defaultValue={selectedCompany.companyPhoneNumber}
+                defaultValue={selectedCompany[0].companyPhoneNumber}
                 disabled
                 type="text"
                 >
@@ -141,13 +176,13 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                 </Col>
               </Row>
 
-              <Row>
+              <Row style={{marginTop:"20px"}}>
                 <Col md="4">
                 <Form.Group>
                   <Form.Label>Country</Form.Label>
                   <Form.Control 
                   type="text"
-                  defaultValue={selectedCompany.Country}
+                  defaultValue={selectedCompany[0].Country}
                   disabled
                   >
             
@@ -155,9 +190,9 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                 </Form.Group>
                 </Col>
                 <Col md="4">
-                <Form.Label>City</Form.Label>
+                <Form.Label >Town</Form.Label>
                 <Form.Control
-                defaultValue="CHAKWAL"
+                defaultValue={selectedCompany[0].Town}
                 disabled
                 type="text"
                 >

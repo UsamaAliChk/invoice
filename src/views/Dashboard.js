@@ -29,11 +29,11 @@ const dispatch=useDispatch()
 
   const handelClick=async(id)=>{
      const company= await axios
-        .get(`https://34.207.140.115:3000/company/${id}`)
+        .get(`https://spiretechs.co.uk:3000/company/${id}`)
         .then(res => {return res.data})
         .catch(err => console.error(err));
       const contacts=await axios
-        .get(`https://34.207.140.115:3000/contacts/${id}`)
+        .get(`https://spiretechs.co.uk:3000/contacts/${id}`)
         .then(res => {return res.data})
         .catch(err => console.error(err));
     
@@ -72,7 +72,7 @@ const dispatch=useDispatch()
   const getCompanies=async()=>{
     dispatch(setCompany([]))
     const data= await axios
-      .get("http://localhost:5000/companies")
+      .get("https://spiretechs.co.uk:3000/companies")
       .then(res => {console.log(res.data); return res.data})
       .catch(err => console.error(err));
       setcompnies(data);
