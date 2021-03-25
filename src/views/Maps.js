@@ -82,14 +82,20 @@ const handelClick=()=>{
     companyAddress.push(selectedCompany[0].Address4);
   }
   console.log(companyAddress)
-  let company={name:selectedCompany[0].companyName,companyAddress,Number:selectedCompany[0].companyPhoneNumber};
+  let company={name:selectedCompany[0].companyName,PostalCode:selectedCompany[0].postalCode,Country:selectedCompany[0].Country,Email:selectedCompany[0].companyEmai
+    ,Town:selectedCompany.Town,companyAddress,Number:selectedCompany[0].companyPhoneNumber};
 
+    console.log("KAKA YAAR KI KRNA AIN")
+    console.log(company);
     let address=[]
     let Name=''
     let phoneNumber=''
     let contactCompanyName=''
     let Email='';
     let id='';
+    let con='';
+    let t='';
+    let p='';
   for(let i =0;i<contacts.length;i++){
     if( contacts[i].contactId==selectedMemberId){
       if(contacts[i].Address1!==null){
@@ -108,7 +114,10 @@ const handelClick=()=>{
       Name=contacts[i].title+' '+contacts[i].firstName+' '+contacts[i].lastName;
       phoneNumber=contacts[i].companyPhoneNumber;
       contactCompanyName=contacts[i].companyName;
-      Email=contacts[i].companyEmail
+      
+      con=contacts[i].Country;
+      t=contacts[i].Town;
+      p=contacts[i].postalCode
     }
   }
  
@@ -116,7 +125,7 @@ const handelClick=()=>{
     .post("https://spiretechs.co.uk:3000/invoice",{items,totalPrice,contactCompanyName,Name})
     .then(res => console.log(res))
     .catch(err => console.error(err));
-let billing={Name,phoneNumber,address,contactCompanyName,Email,id}
+let billing={Name,Town:t,PostalCode:p,Country:con,phoneNumber,address,contactCompanyName,Email,id}
   dispatch(setData({company,billing,items,totalPrice}))
 }
 const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', position: 'fixed', verticalAlign: 'middle', left:'0px', top: '0px', width:'100%', height:'100%', backgroundColor: 'rgba(0,0,0,0.2)'}
@@ -263,7 +272,7 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                 </Col>
               </Row>
               <Row>
-                <Link to='typography'><Button style={{marginTop:"20px",marginLeft:"15px",color:'black'}} onClick={handelClick} disabled={!isEnabled}>CREATE</Button></Link>
+                <Link to={'notifications'}><Button style={{marginTop:"20px",marginLeft:"15px",color:'black'}} onClick={handelClick} disabled={!isEnabled}>CREATE</Button></Link>
               </Row>
             </Form>
           </Col>

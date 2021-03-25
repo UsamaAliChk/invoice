@@ -63,7 +63,13 @@ const dashboardRoutes = [
     component: Typography,
     layout: "/admin",
   },
- 
+  {
+    path: "/notifications",
+    name: "INVIOCE TEMPLATES",
+    icon: "nc-icon nc-bell-55",
+    component: Notifications,
+    layout: "/admin",
+  },
   
   
   {
