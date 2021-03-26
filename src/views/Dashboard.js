@@ -44,10 +44,11 @@ const [logo,setlogo]=useState(null);
 const[file,setfile]=useState()
 
 
-const access = new Credentials({
-  accessKeyId: "AKIA5UT2A32QWWX76HOF",
-  secretAccessKey: "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",
-});
+// const access = new Credentials({
+//   accessKeyId: "AKIA5UT2A32QWWX76HOF",
+//   secretAccessKey: "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",
+// });
+const access='';
 const s3 = new S3({
   credentials: access,
   region: "eu-west-1"
