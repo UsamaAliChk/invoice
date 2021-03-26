@@ -26,6 +26,8 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 import BigLoad from 'components/BigLoad'
 import routes from "routes.js";
 
+import TableList from '../views/Dashboard'
+
 import sidebarImage from "assets/img/sidebar-3.jpg";
 
 function Admin() {
@@ -40,7 +42,7 @@ function Admin() {
       if (prop.layout === "/admin") {
         return (
           <Route
-            path={prop.layout + prop.path}
+            path={prop.layout +prop.path}
             render={(props) => <prop.component {...props} />}
             key={key}
           />

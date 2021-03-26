@@ -33,6 +33,15 @@ const dashboardRoutes = [
     name: "Dashboard",
     icon: "nc-icon nc-chart-pie-35",
     component: Dashboard,
+    show:true,
+    layout: "/admin",
+  },
+  {
+    path: "/invoices",
+    name: "INVOICES",
+    show:true,
+    icon: "fas fa-file-invoice-dollar",
+    component: Icons,
     layout: "/admin",
   },
   {
@@ -47,12 +56,12 @@ const dashboardRoutes = [
     name: "Companies",
     icon: "nc-icon nc-notes",
     component: TableList,
+    show:true,
     layout: "/admin",
   },
   {
     path: "/maps",
-    name: "INVOICE",
-    icon: "fas fa-file-invoice-dollar",
+    name: "INVOICES",
     component: Maps,
     layout: "/admin",
   },
@@ -66,6 +75,7 @@ const dashboardRoutes = [
   {
     path: "/notifications",
     name: "INVIOCE TEMPLATES",
+    show:true,
     icon: "nc-icon nc-bell-55",
     component: Notifications,
     layout: "/admin",

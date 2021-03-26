@@ -81,12 +81,11 @@ const handelClick=()=>{
   if(selectedCompany[0].Address4!==null){
     companyAddress.push(selectedCompany[0].Address4);
   }
-  console.log(companyAddress)
+
   let company={name:selectedCompany[0].companyName,PostalCode:selectedCompany[0].postalCode,Country:selectedCompany[0].Country,Email:selectedCompany[0].companyEmai
     ,Town:selectedCompany.Town,companyAddress,Number:selectedCompany[0].companyPhoneNumber};
 
-    console.log("KAKA YAAR KI KRNA AIN")
-    console.log(company);
+    
     let address=[]
     let Name=''
     let phoneNumber=''
@@ -137,6 +136,11 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
             <Form>
               <Row>
                 <Col md="4">
+                    <Form.Label style={{fontSize:"30px",marginBottom:'30px',textTransform:'uppercase'}}>{selectedCompany[0].companyName}</Form.Label>
+                </Col>
+              </Row>
+              <Row>
+                <Col md="4">
                 <Form.Group>
                   <Form.Label>Select Billing Member</Form.Label>
                   <Form.Control as="select" onChange={e=>{setselectedMemberId(parseInt(e.target.value))}}>
@@ -152,65 +156,13 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                   </Form.Control>
                 </Form.Group>
                 
-                </Col></Row>
-                
-
-                      <Row>
-                      {
-                  Caddress.map((e,i)=>{
-                    return(
-                      <Col md="4">
-                <Form.Label>Address {i+1}</Form.Label>
-                <Form.Control
-                defaultValue={e}
-                disabled
-                type="text"
-                >
-                </Form.Control>
                 </Col>
-                    )
-                  })
-                }
-                      </Row>
-
-                  <Row style={{marginTop:"20px"}}>
                 <Col md="4">
-                <Form.Label>Phone Number</Form.Label>
-                <Form.Control
-                defaultValue={selectedCompany[0].companyPhoneNumber}
-                disabled
-                type="text"
-                >
-                </Form.Control>
-                </Col>
-              </Row>
-
-              <Row style={{marginTop:"20px"}}>
-                <Col md="4">
-                <Form.Group>
-                  <Form.Label>Country</Form.Label>
-                  <Form.Control 
-                  type="text"
-                  defaultValue={selectedCompany[0].Country}
-                  disabled
-                  >
-            
+                  <Form.Label>Due Date</Form.Label>
+                  <Form.Control type="date">
                   </Form.Control>
-                </Form.Group>
                 </Col>
-                <Col md="4">
-                <Form.Label >Town</Form.Label>
-                <Form.Control
-                defaultValue={selectedCompany[0].Town}
-                disabled
-                type="text"
-                >
-                </Form.Control>
-                </Col>
-                
-              </Row>
-              
-
+                </Row>
               {
                 (items!==[])?
                 items.map((e,i)=>{

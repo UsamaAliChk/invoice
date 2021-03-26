@@ -115,7 +115,7 @@ export default function Pdf({Data}) {
                     <View style={{alignItems:"flex-end"}}>
                         <Text style={{marginBottom:'5px'}}>${Data.totalPrice}</Text>
                         <Text style={{marginBottom:'5px'}}>$50</Text>
-                        <Text>${Data.totalPrice}</Text>
+                        <Text>{Data.totalPrice}</Text>
                     </View>
                 </View>
                 {/* <View>

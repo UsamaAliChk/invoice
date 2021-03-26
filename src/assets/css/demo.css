@@ -40,6 +40,13 @@
 .all-icons input{
     border: 0;
 }
+.editIcon{
+  color: #00bbff;
+}
+.editIcon:hover{
+  font-size: 20px;
+  cursor: pointer;
+}
 .all-icons .font-icon-detail{
     text-align: center;
     padding: 45px 0px 30px;
