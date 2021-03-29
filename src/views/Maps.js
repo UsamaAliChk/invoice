@@ -22,7 +22,8 @@ const [qty,setqty]=useState(0);
 const [description,setdescription]=useState('')
 const [items,setitems]=useState([]);
 const [selectedMemberId,setselectedMemberId]=useState('');
-
+const [tax,settax]=useState(0);
+const [dueDate,setdueDate]=useState('');
 const canAdd=description.length>0 && qty!==0 && price!==0;
 const isEnabled=canAdd && selectedMemberId!==''
 
@@ -46,8 +47,7 @@ useEffect(()=>{
   console.log("ADDRESS===",Caddress);
 })
 
-console.log("Hello Usama Ali Khan")
-console.log(selectedCompany);
+
 
 const handelDelete=async(index)=>{
 //  console.log("index is ",index)
@@ -124,8 +124,11 @@ const handelClick=()=>{
     .post("https://spiretechs.co.uk:3000/invoice",{items,totalPrice,contactCompanyName,Name})
     .then(res => console.log(res))
     .catch(err => console.error(err));
+let p1=totalPrice
 let billing={Name,Town:t,PostalCode:p,Country:con,phoneNumber,address,contactCompanyName,Email,id}
-  dispatch(setData({company,billing,items,totalPrice}))
+console.log(billing)
+
+  dispatch(setData({company,dueDate,billing,tax,items,subTotal:p1,totalPrice:totalPrice+tax}))
 }
 const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', position: 'fixed', verticalAlign: 'middle', left:'0px', top: '0px', width:'100%', height:'100%', backgroundColor: 'rgba(0,0,0,0.2)'}
   return (
@@ -159,7 +162,12 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                 </Col>
                 <Col md="4">
                   <Form.Label>Due Date</Form.Label>
-                  <Form.Control type="date">
+                  <Form.Control type="date" onChange={e=>setdueDate(e.target.value)}>
+                  </Form.Control>
+                </Col>
+                <Col md="4">
+                  <Form.Label>Tax</Form.Label>
+                  <Form.Control type="text" onChange={e=>{let s=parseInt(e.target.value);settax(s)}}>
                   </Form.Control>
                 </Col>
                 </Row>
@@ -170,7 +178,7 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                     <div style={{marginBottom:"20px"}} key={i}>
                         <Row>
                           <Col md="5">
-                            <Form.Control type="text" defaultValue={e.description}></Form.Control>
+                            <Form.Control as="textarea" rows={3} defaultValue={e.description}></Form.Control>
                           </Col>
                           <Col md="1">
                             <Form.Control type="text" defaultValue={e.qty}></Form.Control>
@@ -196,7 +204,7 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                 <Col md="6">
                 
                     <Form.Label>Description</Form.Label>
-                    <Form.Control type="text" onChange={e=>{setdescription(e.target.value);}} >
+                    <Form.Control as="textarea" rows={3} type="text" onChange={e=>{setdescription(e.target.value);}} >
                     </Form.Control>
                 </Col>
                 <Col md="2">

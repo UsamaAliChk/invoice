@@ -48,14 +48,18 @@ export default function Pdf({Data}) {
                         <Text style={{color:"#8c8c8c",fontSize:'8'}}>Invoice Number</Text>
                         <Text style={{marginTop:'5px'}}>12356</Text>
                         </View>
-                        <View style={{marginTop:"20px"}}>
+                        <View style={{marginTop:"5px"}}>
                         <Text style={{color:"#8c8c8c",fontSize:'8'}}>Date of Issue</Text>
                         <Text style={{marginTop:'5px'}}>{date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()}</Text>
+                        </View>
+                        <View style={{marginTop:"5px"}}>
+                        <Text style={{color:"#8c8c8c",fontSize:'8'}}>Due Date</Text>
+                        <Text style={{marginTop:'5px'}}>{Data.dueDate}</Text>
                         </View>
                     </View>
                     <View style={style.PriceDetail}>
                         <Text style={{color:"#8c8c8c",fontSize:'8' }}>Invoice Total</Text>
-                        <Text style={{color:'#3385ff',fontSize:"18",marginTop:'5px'}}>${Data.totalPrice}</Text>
+                        <Text style={{color:'#3385ff',fontSize:"18",marginTop:'5px'}}>£{Data.totalPrice}</Text>
                     </View>
                 </View>
 
@@ -88,13 +92,13 @@ export default function Pdf({Data}) {
                 </View>
                 
                 <View style={style.unitpricebox}>
-                    <Text>${e.price}</Text>
+                    <Text>£{e.price}</Text>
                 </View>
                 <View style={style.unitsQty}>
                     <Text>{e.qty}</Text>
                 </View>
                 <View style={style.amountbox}>
-                    <Text>${e.total}</Text>
+                    <Text>£{e.total}</Text>
                 </View>
                 </View>
                         )
@@ -113,9 +117,9 @@ export default function Pdf({Data}) {
                         <Text>Total</Text>
                     </View>
                     <View style={{alignItems:"flex-end"}}>
-                        <Text style={{marginBottom:'5px'}}>${Data.totalPrice}</Text>
-                        <Text style={{marginBottom:'5px'}}>$50</Text>
-                        <Text>{Data.totalPrice}</Text>
+                        <Text style={{marginBottom:'5px'}}>£{Data.subTotal}</Text>
+                        <Text style={{marginBottom:'5px'}}>£{Data.tax}</Text>
+                        <Text>£{Data.totalPrice}</Text>
                     </View>
                 </View>
                 {/* <View>

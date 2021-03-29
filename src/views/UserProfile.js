@@ -1,159 +1,57 @@
-import React,{useState,useEffect} from "react";
-import Image1 from '../Logos/1.jpeg'
-import Image2 from '../Logos/2.jpeg'
-import Image3 from '../Logos/3.jpeg'
-import Image4 from '../Logos/4.jpeg'
-import Image5 from '../Logos/5.jpeg'
-import Image6 from '../Logos/6.jpeg'
-import invoice from '../Logos/invoice1.png'
+import React,{useState} from "react";
+
 import {Link} from 'react-router-dom'
-import axios from 'axios'
-import BigLoad from '../components/BigLoad'
-import { Label,Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-// react-bootstrap components
+
 import {
   FormLabel,FormControl,
-  Badge,
   Button,
   Card,
   Form,
-  Navbar,
-  Nav,
   Container,
   Row,
   Col,
   Table
 } from "react-bootstrap";
 
-import {setContacts} from '../redux/action/index'
 
-import {useSelector,useDispatch} from 'react-redux';
-import Loader from 'react-loader-spinner';
+
+import {useSelector} from 'react-redux'
+import AddContact from '../Models/AddContact'
+import EditContact from '../Models/EditContact'
+import Loader from '../loader/Loading'
 function User() {
 
-  const dispatch=useDispatch()
-  const[title,settitle]=useState('');
-  const[first,setfirst]=useState('');
-  const[last,setlast]=useState('');
-const[Ccountry,setcountry]=useState('');
-const[address1,setaddress1]=useState(null);
-const[address2,setaddress2]=useState(null);
-const[address3,setaddress3]=useState(null);
-const[Cemail,setCemail]=useState(null);
-const [town,settown]=useState(null);
-const[county,setcounty]=useState(null);
-const [postalcode,setpostalcode]=useState(null);
-const [CNumber,setCNumber]=useState(null);
 
   const [Loading,setLoading]=useState(true)
-
   const [IsOpen,setIsOpen]=useState(false)
+  const [Edit,setEdit]=useState(false)
   const data=useSelector(state=>state.getCompany);
   const contacts=useSelector(state=>state.getContacts);
-
   if(data.length>0 && Loading===true) {setLoading(false); }
-
-  const handelSubmit=async()=>{
-    setIsOpen(false);
-    setLoading(true);
-  const body={id:data[0].companyId,title,first,last,Ccountry,Cemail,town,postalcode,address1,address2,address3,CNumber,county}
-    
-  contacts.push({title,firstName:first,lastName:last,contactEmail:Cemail,Country:Ccountry,contactPhoneNumber:CNumber,Address1:address1,
-    Address2:address2,Address3:address3,Town:town,County:county,postalCode:postalcode});
-    dispatch(setContacts(contacts))
-
-    await axios
-      .post("https://spiretechs.co.uk:3000/contact",body)
-      .then(res => {console.log(res.data);})
-      .catch(err => console.error(err));
-    setLoading(false)
-  }
-
-
-  console.log(data)
-  const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', position: 'fixed', verticalAlign: 'middle', left:'0px', top: '0px', width:'100%', height:'100%', backgroundColor: 'rgba(0,0,0,0.2)'}
+  const [contactData,setcontactData]=useState([]);
+  const [id1,setid1]=useState('');
+  
+  const editContact=(id)=>{
+    let s={}
+    for(let i=0;i<contacts.length;i++){
+        if(contacts[i].contactId===id){
+          s=contacts[i];
+        }
+    }
+    setcontactData(s);
+    setid1(id);
+    //console.log(s);
+    setEdit(true);
+}
  
   return (
-    
+  
     <>
-     <Modal isOpen={IsOpen} size="lg">
-        
-        <ModalHeader>ADD CONTACT</ModalHeader>
-        <ModalBody>
-          <Row>
-            <Col md="4">
-              <FormLabel>Title</FormLabel>
-              <FormControl type="text" onChange={e=>{settitle(e.target.value)}}></FormControl>
-             </Col>
-             <Col md="4">
-              <FormLabel>First Name</FormLabel>
-              <FormControl type="text" onChange={e=>{setfirst(e.target.value)}}></FormControl>
-             </Col>
-             <Col md="4">
-              <FormLabel>Last Name</FormLabel>
-              <FormControl type="text" onChange={e=>{setlast(e.target.value)}}></FormControl>
-             </Col>
-          </Row>
-          <Row>
-          <Col md="6">
-              <FormLabel>Email</FormLabel>
-              <FormControl type="text" onChange={e=>{setCemail(e.target.value)}}></FormControl>
-            </Col>
-          <Col md="4">
-              <FormLabel>Postal Code</FormLabel>
-              <FormControl type="text" onChange={e=>{setpostalcode(e.target.value)}}></FormControl>
-            </Col>
-          </Row>
-          <Row>
-            <Col md="6">
-              <FormLabel>Address 1</FormLabel>
-              <FormControl type="text" onChange={e=>{setaddress1(e.target.value)}}></FormControl>
-            </Col>
-            <Col md="6">
-              <FormLabel>Address 2</FormLabel>
-              <FormControl type="text" onChange={e=>{setaddress2(e.target.value)}}></FormControl>
-            </Col>
-          </Row>
-            <Row>
-            <Col md="6">
-              <FormLabel>Address 3</FormLabel>
-              <FormControl type="text" onChange={e=>{setaddress3(e.target.value)}}></FormControl>
-            </Col>
-            <Col md="6">
-              <FormLabel>Phone Number</FormLabel>
-              <FormControl type="text" onChange={e=>{setCNumber(e.target.value)}}></FormControl>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md="4">
-              <FormLabel>Country</FormLabel>
-              <FormControl type="text" onChange={e=>{setcountry(e.target.value)}}></FormControl>
-            </Col>
-          <Col md="4">
-              <FormLabel>Town</FormLabel>
-              <FormControl type="text" onChange={e=>{settown(e.target.value)}}></FormControl>
-            </Col>
-            
-            <Col md="4">
-              <FormLabel>County</FormLabel>
-              <FormControl type="text" onChange={e=>{setcounty(e.target.value)}}></FormControl>
-            </Col>
-          </Row>
-        </ModalBody>
-        <ModalFooter>
-          <Button onClick={e=>{handelSubmit()}}>Save</Button>
-          <Button color="secondary" onClick={e=>setIsOpen(false)}>Cancel</Button>
-        </ModalFooter>
-      </Modal>
+      <EditContact Edit={Edit} setEdit={setEdit} id1={id1} contactData={contactData} setLoading={setLoading}/>
+     <AddContact IsOpen={IsOpen} data={data} setLoading={setLoading} contacts={contacts} setIsOpen={setIsOpen}/>
       {
 
-        Loading? <div style={styles}>
-        <div style={{paddingTop:"300px",paddingLeft:"50px"}}>
-      <Loader  type="Circles"
-      color="#595959"
-      height={100}
-      width={100}/></div></div>:
+        Loading? <Loader show={true}/>:
 
       <Container fluid>
         <Row>
@@ -360,7 +258,7 @@ const [CNumber,setCNumber]=useState(null);
                         <td>{name}</td>
                           <td>{e.companyName}</td>
                           <td>{e.contactEmail}</td>
-                          <td className="editIcon"><i class="far fa-edit"></i></td>
+                          <td className="editIcon" onClick={e1=>{editContact(e.contactId)}}><i class="far fa-edit"></i></td>
                         </tr>
                         )
                       })

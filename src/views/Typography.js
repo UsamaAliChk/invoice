@@ -10,22 +10,24 @@ import {
 
 import S3 from "aws-sdk/clients/s3";
 import { Credentials } from "aws-sdk";
-
-
+import axios from 'axios'
+import Loader from '../loader/Loading'
 
 export default function PDFView() {
 
     const data=useSelector(state=>state.getData)
-   
+   const [loading,setloading]=useState(false)
     const type=localStorage.getItem('type')
     const [pdfLink,setpdfLink]=useState('')
     const [pdfBlob,setpdfBlob]=useState('');
-
-    const access='';
-    // const access = new Credentials({
-    //     accessKeyId: "AKIA5UT2A32QWWX76HOF",
-    //     secretAccessKey: "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",
-    //   });
+    const [enable,setenable]=useState(false)
+    let date=new Date();
+    let issuedDate=date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()
+   // const access='';
+    const access = new Credentials({
+        accessKeyId: "AKIA5UT2A32QWWX76HOF",
+        secretAccessKey: "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",
+      });
       const s3 = new S3({
         credentials: access,
         region: "eu-west-1"
@@ -35,8 +37,9 @@ export default function PDFView() {
         const params = {
           Bucket: "tth-cms1",
           ACL: "public-read",
-          Key: `${data.billing.Name}`,
-          Body: pdfBlob
+          Key: `abcd${Math.random()}.pdf`,
+          Body: pdfBlob,
+      
         };
         try{
         var s4=await s3.upload(params)
@@ -49,8 +52,19 @@ export default function PDFView() {
     }
 
     const handelSave=async()=>{
-        const link=Upload()
+      setloading(true)
+        const link=await Upload()
+        console.log(data)
+        let body={companyName:data.company.name,contactName:data.billing.Name,issuedDate,dueDate:data.dueDate,link}
+        console.log(body)
+        
+        axios
+          .post("https://spiretechs.co.uk:3000/invoice",body)
+          .then(res => (console.log(res)))
+          .catch(err => console.error(err));
         console.log(link)
+        setenable(true)
+        setloading(false)
     }
 
 
@@ -82,12 +96,10 @@ export default function PDFView() {
         alert("It will not be auto saved")
     },[])
     return (
-
-        
+      loading?<Loader show={true}/>:
         <div>
-            <Button onClick={handelSave}>SAVE</Button>
+            <Button disabled={enable} onClick={handelSave}>SAVE</Button>
             <iframe style={{ width: "100%", height: "600px" }} src={pdfLink}></iframe>
-        
         </div>
     )
 }

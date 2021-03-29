@@ -53,7 +53,7 @@ export default function Documnet1({Data}) {
                 </View>
                 <View style={style.customerID}>
                     <Text style={{marginLeft:'20px'}}>CUSTOMER ID</Text>
-                    <Text style={{marginRight:'20px'}}>TERMS</Text>
+                    <Text style={{marginRight:'20px'}}>DUE DATE</Text>
                 </View>
             </View>
 
@@ -75,7 +75,7 @@ export default function Documnet1({Data}) {
                             <Text>{Data.billing.id}</Text>
                         </View>
                         <View style={style.userterm}>
-                            <Text>Terms and Cond</Text>
+                            <Text>{Data.dueDate}</Text>
                         </View>
                     </View>
             </View>
@@ -172,17 +172,23 @@ export default function Documnet1({Data}) {
                 <View style={style.paymentDetail}>
                     <Text style={{fontFamily:'Italic',textAlign:'center',color:'#3973ac',marginTop:'5px',fontSize:'12'}}>Thank You For Shopping Here</Text>
                 </View>
+                
                 <View style={style.subTotal}>
                     <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>SUBTOTAL</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>Tax</Text>
                     <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>Total</Text>
+                
                 </View>
                 <View style={style.total}>
-                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>{Data.totalPrice}</Text>
-                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>{Data.totalPrice} $</Text>
+
+                    
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>£ {Data.subTotal}</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>£ {Data.tax}</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>£ {Data.totalPrice}</Text>
                 </View>
             </View>
                 <Text style={{position:'absolute',top:770,textAlign:'center',fontSize:11,fontFamily:'Lato'}}>{Data.company.name+'  Company Number '+Data.company.Number} </Text>
-                <Text style={{position:'absolute',top:785,textAlign:'center',fontSize:11,fontFamily:'Lato'}}>Usama trade center is good center</Text>
+               
             </View>
             
         </Page>
@@ -315,7 +321,6 @@ var style=StyleSheet.create({
         textAlign:'center'
     },
     userterm:{
-        marginLeft:'10px',
         marginTop:'10px',
         width:'80px',
         textAlign:"center",

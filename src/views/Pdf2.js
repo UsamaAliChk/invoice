@@ -5,6 +5,7 @@ import {Page,View,Text,StyleSheet,Font,Image,
 import laptop from '../assets/img/laptop.png'
 import user from '../assets/img/user1.png'
 export default function Pdf2({Data}) {
+
     let date=new Date();
     return (
         <Document>
@@ -49,6 +50,8 @@ export default function Pdf2({Data}) {
                         <View style={{marginTop:'20px',alignItems:'flex-end'}}>
                         <Text>Invoice Date</Text>
                         <Text style={{marginTop:'5px'}}>{date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()}</Text>
+                        <Text>Due Date</Text>
+                        <Text style={{marginTop:'5px'}}>{Data.dueDate}</Text>
                         </View>
                     </View>
                 </View>
@@ -108,7 +111,7 @@ export default function Pdf2({Data}) {
                     <View style={{backgroundColor:'#3973ac',width:'175',height:'70',justifyContent:'center',color:'white',alignItems:'flex-end'}}>
                         <View style={{marginRight:'20px',alignItems:'flex-end'}}>
                         <Text style={{fontSize:'12'}}>Total</Text>
-                        <Text style={{fontSize:'15'}}>${Data.totalPrice}</Text>
+                        <Text style={{fontSize:'15'}}>£{Data.totalPrice}</Text>
                         </View>
                     </View>
                 </View>

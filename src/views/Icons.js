@@ -13,24 +13,40 @@ import {
   Table,
   Col,
 } from "react-bootstrap";
-
-
-import Loader  from 'react-loader-spinner'
+import axios from 'axios'
+import Loader from '../loader/Loading'
+import {Document,pdf} from '@react-pdf/renderer'
+import ShowPdf from './ShowPdf'
 function Icons() {
-
+  const [link,setlink]=useState('')
   const [invoices,setinvoices]=useState([]);
-  const [Loading,setLoading]=useState(false)
+  const [Loading,setLoading]=useState(true)
+  const [pdfLink,setpdfLink]=useState('')
+const openPdf=async()=>{
+  let blob= await pdf(
+    <ShowPdf/>
+  ).toBlob()
+  setpdfLink(window.URL.createObjectURL(blob));
+  console.log(pdfLink)
+  //setpdfBlob(blob);
+}
 
-  const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', position: 'fixed', verticalAlign: 'middle', left:'0px', top: '0px', width:'100%', height:'100%', backgroundColor: 'rgba(0,0,0,0.2)'}
+  const getInvoices=async()=>{
+    const data= await axios
+      .get("https://spiretechs.co.uk:3000/invoices")
+      .then(res => {console.log(res.data); return res.data})
+      .catch(err => console.error(err));
+      setinvoices(data);
+      setLoading(false);
+  }
+  useEffect(()=>{
+    getInvoices();
+    openPdf();
+  },[])
   return (
     <>
     {
-      Loading?<div style={styles}>
-      <div style={{paddingTop:"300px",paddingLeft:"50px"}}>
-    <Loader  type="Circles"
-    color="#595959"
-    height={100}
-    width={100}/></div></div>:
+      Loading?<Loader show={true}/>:
       <Container fluid>
           <Col>
           <Card>
@@ -41,8 +57,10 @@ function Icons() {
                   <tr>
                       <th className="border-0">ID</th>
                       <th className="border-0">Contact Name</th>
+                      <th className="border-0">Company Name</th>
                       <th className="border-0">Issued Date</th>
                       <th className="border-0">Due Date</th>
+                      <th className="border-0">Pdf Link</th>
                       <th className="border-0"></th>
                     </tr>
                   </thead>
@@ -55,9 +73,10 @@ function Icons() {
                             <td>{i+1}</td>
                       
                             <td>{e.contactName}</td>
+                            <td>{e.companyName}</td>
                             <td style={{textTransform:'uppercase'}}>{e.issuedDate}</td>
                             <td >{e.dueDate}</td>
-                            <td><Button>SHOW</Button></td>
+                            <td> <a target="blank" href={e.link}>link</a></td>
                         </tr>
                         )
                       })
@@ -67,6 +86,8 @@ function Icons() {
               </Card.Body>
             </Card>
           </Col>
+         
+            
         </Container> }    
     </>
   );
