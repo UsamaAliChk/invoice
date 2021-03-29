@@ -29,7 +29,7 @@ const isEnabled=canAdd && selectedMemberId!==''
 
 
 useEffect(()=>{
-  console.log(selectedCompany)
+  //console.log(selectedCompany)
   let companyAddress=[]
   if(selectedCompany[0].Address1!==null){
     companyAddress.push(selectedCompany[0].Address1);
@@ -44,7 +44,7 @@ useEffect(()=>{
     companyAddress.push(selectedCompany[0].Address4);
   }
   setCaddress(companyAddress);
-  console.log("ADDRESS===",Caddress);
+
 })
 
 
@@ -126,7 +126,7 @@ const handelClick=()=>{
     .catch(err => console.error(err));
 let p1=totalPrice
 let billing={Name,Town:t,PostalCode:p,Country:con,phoneNumber,address,contactCompanyName,Email,id}
-console.log(billing)
+//console.log(billing)
 
   dispatch(setData({company,dueDate,billing,tax,items,subTotal:p1,totalPrice:totalPrice+tax}))
 }
@@ -228,7 +228,18 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                     <Form.Control type="text" onChange={(e)=>{let value=parseInt(e.target.value) ;setprice(value)}}></Form.Control>
                 </Col>
                 <Col md="1">
-                    <Button style={{marginTop:"30px",color:"black"}} onClick={e=>{let total=qty*price;let total2=totalPrice+total;settotalPrice(total2); setitems(old=>[...old,{description,qty,price,total}])}} disabled={!canAdd}>ADD</Button>
+                    <Button style={{marginTop:"30px",color:"black"}} onClick={e=>{
+                      
+                      if(!isNaN(qty)){
+                      let total=qty*price;
+                      let total2=totalPrice+total;
+                      settotalPrice(total2); 
+                      setitems(old=>[...old,{description,qty,price,total}])}
+                      else{
+                        setitems(old=>[...old,{description,qty:0,price:0,total:0}])
+                      }
+                      
+                      }} disabled={!canAdd}>ADD</Button>
                 </Col>
               </Row>
               <Row>

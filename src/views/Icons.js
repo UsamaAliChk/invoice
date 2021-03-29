@@ -15,21 +15,11 @@ import {
 } from "react-bootstrap";
 import axios from 'axios'
 import Loader from '../loader/Loading'
-import {Document,pdf} from '@react-pdf/renderer'
-import ShowPdf from './ShowPdf'
+
 function Icons() {
   const [link,setlink]=useState('')
   const [invoices,setinvoices]=useState([]);
   const [Loading,setLoading]=useState(true)
-  const [pdfLink,setpdfLink]=useState('')
-const openPdf=async()=>{
-  let blob= await pdf(
-    <ShowPdf/>
-  ).toBlob()
-  setpdfLink(window.URL.createObjectURL(blob));
-  console.log(pdfLink)
-  //setpdfBlob(blob);
-}
 
   const getInvoices=async()=>{
     const data= await axios
@@ -41,7 +31,7 @@ const openPdf=async()=>{
   }
   useEffect(()=>{
     getInvoices();
-    openPdf();
+   
   },[])
   return (
     <>

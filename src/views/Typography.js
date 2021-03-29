@@ -56,11 +56,11 @@ export default function PDFView() {
         const link=await Upload()
         console.log(data)
         let body={companyName:data.company.name,contactName:data.billing.Name,issuedDate,dueDate:data.dueDate,link}
-        console.log(body)
+        console.log("USAMA ALI KAHN",body)
         
-        axios
+        const s=await axios
           .post("https://spiretechs.co.uk:3000/invoice",body)
-          .then(res => (console.log(res)))
+          .then(res => {return res})
           .catch(err => console.error(err));
         console.log(link)
         setenable(true)
@@ -98,7 +98,7 @@ export default function PDFView() {
     return (
       loading?<Loader show={true}/>:
         <div>
-            <Button disabled={enable} onClick={handelSave}>SAVE</Button>
+            <Button disabled={enable} onClick={e=>{handelSave()}}>SAVE</Button>
             <iframe style={{ width: "100%", height: "600px" }} src={pdfLink}></iframe>
         </div>
     )
