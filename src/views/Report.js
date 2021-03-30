@@ -11,10 +11,9 @@ import Italic from '../fonts/Roboto-Italic.ttf'
 import Lato from '../fonts/Lato-Regular.ttf'
 export default function Documnet1({Data}) {
 
-    console.log("Usama Ali")
-    console.log(Data)
+   
     let date=new Date();
-
+console.log(Data.billing)
     console.log(date.getYear())
     return (
        <Document>
@@ -37,23 +36,23 @@ export default function Documnet1({Data}) {
                 <Text style={{marginTop:"10px"}}>Phone: {Data.company.Number}</Text>
                 <View style={style.invioceNumberMain}>
                     <View style={style.invoiceNumber}>
-                        <Text style={{marginLeft:'20px',marginTop:'-2%'}}>INVOICE #</Text>
-                        <Text style={{marginRight:'20px'}}>Date</Text>
+                        <Text style={{marginLeft:'20px',marginTop:'-2%'}}>Invoice #</Text>
+                        <Text style={{marginRight:'3px'}}>Date</Text>
                     </View>
                     <View style={{display:'flex',justifyContent:'space-between',marginTop:'5px',flexDirection:'row'}}>
                         <Text style={{marginLeft:'20px'}}>1234</Text>
-                        <Text style={{marginRight:'10px'}}>{date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()}</Text>
+                        <Text style={{alignItems:"flex-end"}}>{date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate()}</Text>
                     </View>
                 </View>
             </View>
 
             <View style={style.billtoSection}>
                 <View style={style.billto}>
-                    <Text style={{marginLeft:'20px'}}>BILL TO</Text>
+                    <Text style={{marginLeft:'20px'}}>Bill To</Text>
                 </View>
                 <View style={style.customerID}>
-                    <Text style={{marginLeft:'20px'}}>CUSTOMER ID</Text>
-                    <Text style={{marginRight:'20px'}}>DUE DATE</Text>
+                    <Text style={{marginLeft:'20px'}}>Customer Id</Text>
+                    <Text style={{marginRight:'3px'}}>Due Date</Text>
                 </View>
             </View>
 
@@ -75,7 +74,7 @@ export default function Documnet1({Data}) {
                             <Text>{Data.billing.id}</Text>
                         </View>
                         <View style={style.userterm}>
-                            <Text>{Data.dueDate}</Text>
+                            <Text style={{alignItems:'flex-end'}}>{Data.dueDate}</Text>
                         </View>
                     </View>
             </View>
@@ -171,31 +170,49 @@ export default function Documnet1({Data}) {
             <View style={style.totalBox}>
                 <View style={style.paymentDetail}>
                     <Text style={{fontFamily:'Italic',textAlign:'center',color:'#3973ac',marginTop:'5px',fontSize:'12'}}>Thank You For Shopping Here</Text>
+                    <View style={{marginTop:'10px',marginLeft:'20px'}}>
+                    <Text >Payment Details</Text>
+
+
+                    {
+                        Data.bankInfo.bankName!=null?
+                        <Text style={{fontFamily:'Lato',fontSize:'10'}}>{Data.bankInfo.bankName}</Text>:<Text></Text>
+                    }
+                    {
+                        Data.bankInfo.accountNumber!=null?
+                        <Text style={{fontFamily:'Lato',fontSize:'10'}}>Account No: {Data.bankInfo.accountNumber}</Text>:<Text></Text>
+                    }
+                    {
+                        Data.bankInfo.sortCode!=null?
+                        <Text style={{fontFamily:'Lato',fontSize:'10'}}>Sort Code: {Data.bankInfo.sortCode}</Text>:<Text></Text>
+                    }
+                                
+
+                    </View>
                 </View>
                 
                 <View style={style.subTotal}>
-                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>SUBTOTAL</Text>
-                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>Tax</Text>
-                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>Total</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>Sub Total</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>Vat</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>Total</Text>
                 
                 </View>
                 <View style={style.total}>
 
                     
-                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>£ {Data.subTotal}</Text>
-                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>£ {Data.tax}</Text>
-                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'12'}}>£ {Data.totalPrice}</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>£ {Data.subTotal}</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>£ {Data.tax}</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>£ {Data.totalPrice}</Text>
                 </View>
             </View>
-                <Text style={{position:'absolute',top:770,textAlign:'center',fontSize:11,fontFamily:'Lato'}}>{Data.company.name+'  Company Number '+Data.company.Number} </Text>
-               
+                <Text style={{position:'absolute',top:770,textAlign:'center',fontSize:11,fontFamily:'Lato'}}>{Data.company.name+',  Company Number '+Data.company.Number} </Text>
+                <Text style={{position:'absolute',top:785,textAlign:'center',fontSize:11,fontFamily:'Lato'}}>{Data.billing.Name+' '+Data.billing.phoneNumber+' '+Data.billing.Email} </Text>
             </View>
             
         </Page>
        </Document>
     )
 }
-
 Font.register({
     family: "Lato",
     src: Lato,
@@ -239,8 +256,8 @@ var style=StyleSheet.create({
         width:"100px",
         marginTop:"20px",
         lineHeight:1.5,
-        fontSize:9,
-        fontFamily:'Newsreader'
+        fontSize:10,
+        fontFamily:'Lato'
     },
     phoneAndInviove:{
         
@@ -248,7 +265,7 @@ var style=StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         fontSize:10,
-        fontFamily:'Newsreader'
+        fontFamily:'Lato'
     },
     invoiceNumber:{
         display:'flex',
@@ -279,7 +296,7 @@ var style=StyleSheet.create({
         fontSize:9,
         height:'22px',
         width:'270px',
-        fontFamily:'Newsreader' 
+        fontFamily:'Lato' 
     },
     customerID:{
         display:'flex',
@@ -291,7 +308,7 @@ var style=StyleSheet.create({
         alignItems:'center',
         width:'180px',
         height:'22px',
-        fontFamily:'Newsreader'
+        fontFamily:'Lato'
     },
     userInfoBox:{
         display:'flex',
@@ -312,18 +329,19 @@ var style=StyleSheet.create({
         flexDirection:'row',
         marginLeft:'50px',
         fontSize:'10',
-        fontFamily:'Newsreader'
+        fontFamily:'Lato'
 
     },
     id:{
         marginTop:'10px',
         width:'70px',
-        textAlign:'center'
+        alignItems:'flex-start'
     },
     userterm:{
         marginTop:'10px',
-        width:'80px',
-        textAlign:"center",
+        width:'84px',
+        alignItems:'flex-end',
+        fontFamily:'Lato'
     },
     priceTitles:{
         position:'relative',
@@ -334,7 +352,7 @@ var style=StyleSheet.create({
         marginTop:'40px',
         width:'475px',
         color:'white',
-        fontFamily:'Newsreader',
+        fontFamily:'Lato',
         fontSize:10
     },
     description:{
@@ -365,7 +383,7 @@ var style=StyleSheet.create({
         flexDirection:'row',
         width:'475px',
         fontSize:10,
-        fontFamily:"Newsreader"
+        fontFamily:'Lato'
     },
     unitDescription:{
         width:'270px',
@@ -407,7 +425,7 @@ var style=StyleSheet.create({
 
         display:'flex',
         flexDirection:'row',
-        height:'100px',
+        height:'80px',
         fontSize:10,
         fontFamily:'Roboto'
 

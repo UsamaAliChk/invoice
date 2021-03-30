@@ -92,6 +92,7 @@ const searchByName=(value)=>{
       setcompnies(data);
       setallCompanies(data);
       setloading(false);
+      console.log(data)
   }
   useEffect(()=>{
     getCompanies();

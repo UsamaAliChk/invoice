@@ -42,7 +42,14 @@ export default function CompanyAddModel({open,setopen,setallCompanies,setcompnie
       county:Yup.string(),
       town:Yup.string().required(),
       postalcode:Yup.string().required(),
-      logo:Yup.string()
+      logo:Yup.string(),
+      bankName:Yup.string(),
+      accountNumber:Yup.string(),
+      sortCode:Yup.string(),
+      swiftCode:Yup.string(),
+      bicCode:Yup.string(),
+      accountName:Yup.string(),
+      vat:Yup.string().required()
     })
 
 
@@ -82,11 +89,26 @@ const Upload=async()=>{
       console.log(logo)
     
 
-      const body={Cname:payload.Cname,Ccountry:payload.Ccountry,
-        Cemail:payload.Cemail
-        ,town:payload.town,postalcode:payload.postalcode
-        ,address1:payload.address1,address2:payload.address2,address3:payload.address3,CNumber:payload.CNumber,
-        county:payload.county,logo}
+      const body={
+        Cname:payload.Cname,
+        Ccountry:payload.Ccountry,
+        Cemail:payload.Cemail,
+        town:payload.town,
+        postalcode:payload.postalcode,
+        address1:payload.address1,
+        address2:payload.address2,
+        address3:payload.address3,
+        CNumber:payload.CNumber,
+        county:payload.county,
+        logo,
+        bankName:payload.bankName,
+        accountNumber:payload.accountNumber,
+        accountName:payload.accountName,
+        bicCode:payload.bicCode,
+        swiftCode:payload.swiftCode,
+        sortCode:payload.sortCode,
+        vat:payload.vat
+      }
 
         //console.log(body)
         await axios
@@ -118,7 +140,14 @@ const Upload=async()=>{
               address3:'',
               address1:'',
               address2:'',
-              logo:''
+              logo:'',
+              sortCode:null,
+              accountName:null,
+              accountNumber:null,
+              bankName:null,
+              swiftCode:null,
+              bicCode:null,
+              vat:0
             }}
           >
             {
@@ -170,15 +199,20 @@ const Upload=async()=>{
             </Col>
           </Row>
             <Row>
-            <Col md="6">
+            <Col md="5">
             <FormLabel>Address 3</FormLabel>
               <FormControl type="text" id="address3" value={values.address3} isInvalid={!!errors.address3} isValid={errors.address3} onChange={handleChange}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.address3}</Form.Control.Feedback>
             </Col>
-            <Col md="6">
+            <Col md="5">
             <FormLabel>Phone Number</FormLabel>
               <FormControl type="text" id="CNumber" isInvalid={!!errors.CNumber} isValid={errors.CNumber} value={values.CNumber} onChange={handleChange}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.CNumber}</Form.Control.Feedback>
+            </Col>
+            <Col md="2">
+            <FormLabel>Vat Percentage</FormLabel>
+              <FormControl type="text" id="vat" isInvalid={!!errors.vat} isValid={errors.vat} value={values.vat} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.vat}</Form.Control.Feedback>
             </Col>
           </Row>
 
@@ -200,6 +234,44 @@ const Upload=async()=>{
               <Form.Control.Feedback type="invalid">{errors.county}</Form.Control.Feedback>
             </Col>
           </Row>
+
+            <Row>
+              <Col md="6">
+              <FormLabel>Bank Name</FormLabel>
+              <FormControl type="text" isInvalid={!!errors.bankName} isValid={errors.bankName} id="bankAccount" value={values.bankName} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.bankName}</Form.Control.Feedback>
+              </Col>
+              <Col md="3">
+              <FormLabel>Sort Code</FormLabel>
+              <FormControl type="text" isInvalid={!!errors.sortCode} isValid={errors.sortCode} id="sortCode" value={values.sortCode} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.sortCode}</Form.Control.Feedback>
+              </Col>
+              <Col md="3">
+              <FormLabel>Bic Code</FormLabel>
+              <FormControl type="text" isInvalid={!!errors.bicCode} isValid={errors.bicCode} id="bicCode" value={values.bicCode} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.bicCode}</Form.Control.Feedback>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col md="4">
+              <FormLabel>Account Name</FormLabel>
+              <FormControl type="text" isInvalid={!!errors.accountName} isValid={errors.accountName} id="accountName" value={values.accountName} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.accountName}</Form.Control.Feedback>
+              </Col>
+              
+              <Col md="5">
+              <FormLabel>Account Number</FormLabel>
+              <FormControl type="text" isInvalid={!!errors.accountNumber} isValid={errors.accountNumber} id="accountNumber" alue={values.accountNumber} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.accountNumber}</Form.Control.Feedback>
+              </Col>
+              <Col md="3">
+              <FormLabel>Swift Code</FormLabel>
+              <FormControl type="text" isInvalid={!!errors.swiftCode} isValid={errors.bicCode} id="swiftCode" value={values.swiftCode} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.swiftCode}</Form.Control.Feedback>
+              </Col>
+            </Row>
+
           <Row>
             <FormLabel>Logo</FormLabel>
               <FormControl type="file" onChange={(e)=>setfile(e.target.files[0])}></FormControl>

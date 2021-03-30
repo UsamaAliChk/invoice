@@ -111,24 +111,60 @@ const handelClick=()=>{
       }
       id=contacts[i].contactId;
       Name=contacts[i].title+' '+contacts[i].firstName+' '+contacts[i].lastName;
-      phoneNumber=contacts[i].companyPhoneNumber;
+      phoneNumber=contacts[i].contactPhoneNumber;
       contactCompanyName=contacts[i].companyName;
-      
+      Email=contacts[i].contactEmail
       con=contacts[i].Country;
       t=contacts[i].Town;
       p=contacts[i].postalCode
     }
   }
- 
-  axios
-    .post("https://spiretechs.co.uk:3000/invoice",{items,totalPrice,contactCompanyName,Name})
-    .then(res => console.log(res))
-    .catch(err => console.error(err));
+
+  let bankInfo={}
+  if(selectedCompany[0].bankName!==null){
+    bankInfo.bankName=selectedCompany[0].bankName;
+  }
+  else{
+    bankInfo.bankName=null
+  }
+  if(selectedCompany[0].accountNumber!==null){
+    bankInfo.accountNumber=selectedCompany[0].accountNumber;
+  }
+  else{
+    bankInfo.accountNumber=null
+  }
+  if(selectedCompany[0].sortCode!==null){
+    bankInfo.sortCode=selectedCompany[0].sortCode;
+  }
+  else{
+    bankInfo.sortCode=null
+  }
+  // if(selectedCompany[0].accountName!==null){
+  //     bankInfo.push(selectedCompany[0].accountName);
+  // }
+  // if(selectedCompany[0].bicCode!==null){
+  //   bankInfo.push(selectedCompany[0].bicCode);
+  // }
+  // if(selectedCompany[0].swiftCode!==null){
+  //   bankInfo.push(selectedCompany[0].swiftCode);
+  // }
 let p1=totalPrice
+
+let per,p2=''
+console.log(selectedCompany[0].vat)
+if(selectedCompany[0].vat!==null){
+ p2=parseInt(selectedCompany[0].vat);
+ per=(totalPrice*p2)/100;}
+else{
+   p2=0;
+ per=0;
+}
+
+
 let billing={Name,Town:t,PostalCode:p,Country:con,phoneNumber,address,contactCompanyName,Email,id}
 //console.log(billing)
 
-  dispatch(setData({company,dueDate,billing,tax,items,subTotal:p1,totalPrice:totalPrice+tax}))
+  dispatch(setData({bankInfo,company,dueDate,billing,tax:per,items,subTotal:p1,totalPrice:totalPrice+per}))
 }
 const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', position: 'fixed', verticalAlign: 'middle', left:'0px', top: '0px', width:'100%', height:'100%', backgroundColor: 'rgba(0,0,0,0.2)'}
   return (
@@ -165,11 +201,7 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                   <Form.Control type="date" onChange={e=>setdueDate(e.target.value)}>
                   </Form.Control>
                 </Col>
-                <Col md="4">
-                  <Form.Label>Tax</Form.Label>
-                  <Form.Control type="text" onChange={e=>{let s=parseInt(e.target.value);settax(s)}}>
-                  </Form.Control>
-                </Col>
+                
                 </Row>
               {
                 (items!==[])?
@@ -239,6 +271,18 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                         setitems(old=>[...old,{description,qty:0,price:0,total:0}])
                       }
                       
+                      if(selectedCompany[0].vat!==null){
+                        
+                        let p2=parseInt(selectedCompany[0].vat);
+                        let per=(totalPrice*p2)/100;
+                        console.log(per)
+                      settax(per)
+                      }
+                        else{
+                        settax(0)
+                        }
+
+
                       }} disabled={!canAdd}>ADD</Button>
                 </Col>
               </Row>
