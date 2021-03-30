@@ -16,7 +16,7 @@ import axios from 'axios';
   import {useDispatch} from 'react-redux';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
-import { useForm } from 'react-hook-form';
+
 export default function AddContact({IsOpen,data,setLoading,contacts,setIsOpen}) {
 
 //   const { register, handleSubmit, errors } = useForm();
@@ -64,12 +64,17 @@ const addnewcontact=async(payload)=>{
     ,address1:payload.address1,address2:payload.address2,address3:payload.address3,CNumber:payload.CNumber,
     county:payload.county}
     
-  contacts.push({title,firstName:first,lastName:last,contactEmail:Cemail,Country:Ccountry,contactPhoneNumber:CNumber,Address1:address1,
-    Address2:address2,Address3:address3,Town:town,County:county,postalCode:postalcode});
+   contacts.push({title:payload.title,firstName:payload.first,lastName:payload.last,
+    contactEmail:payload.Cemail,
+    Country:payload.Ccountry,
+    contactPhoneNumber:payload.CNumber,Address1:payload.address1,
+     Address2:payload.address2,Address3:payload.address3,Town:payload.town,County:payload.county,
+     postalCode:payload.postalcode});
+     console.log(contacts)
     dispatch(setContacts(contacts))
-    await axios
+    let p=await axios
       .post("https://spiretechs.co.uk:3000/contact",body)
-      .then(res => {console.log(res.data);})
+      .then(res => {console.log(res.data); return res})
       .catch(err => console.error(err));
     setLoading(false)
   }

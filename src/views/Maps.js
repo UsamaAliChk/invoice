@@ -201,7 +201,11 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                   <Form.Control type="date" onChange={e=>setdueDate(e.target.value)}>
                   </Form.Control>
                 </Col>
-                
+                <Col md="4">
+                  <Form.Label>Tax</Form.Label>
+                  <Form.Control type="text" value={tax}>
+                  </Form.Control>
+                </Col>
                 </Row>
               {
                 (items!==[])?
@@ -261,10 +265,11 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                 </Col>
                 <Col md="1">
                     <Button style={{marginTop:"30px",color:"black"}} onClick={e=>{
-                      
+                      let s5=0
                       if(!isNaN(qty)){
                       let total=qty*price;
                       let total2=totalPrice+total;
+                      s5=total2
                       settotalPrice(total2); 
                       setitems(old=>[...old,{description,qty,price,total}])}
                       else{
@@ -272,11 +277,11 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                       }
                       
                       if(selectedCompany[0].vat!==null){
-                        
                         let p2=parseInt(selectedCompany[0].vat);
-                        let per=(totalPrice*p2)/100;
-                        console.log(per)
-                      settax(per)
+                        let per=(s5*p2)/100; 
+                        console.log(per)                       
+                        settax(per)
+                        console.log(tax)
                       }
                         else{
                         settax(0)

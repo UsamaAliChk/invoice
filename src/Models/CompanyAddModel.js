@@ -71,11 +71,7 @@ const Upload=async()=>{
     Body: file
   };
   try{
-  var s4=await s3.upload(params,(data,err)=>{
-    if(!err) return data
-    else throw err
-  })
-
+  var s4=await s3.upload(params).promise();
     console.log(s4)
     return s4.Location
   }
@@ -89,8 +85,7 @@ const Upload=async()=>{
         setopen(false);
         setloading(true);
         var s=await Upload();
-        setlogo(s)
-      console.log(s)
+      
     debugger
 
       const body={
@@ -104,7 +99,7 @@ const Upload=async()=>{
         address3:payload.address3,
         CNumber:payload.CNumber,
         county:payload.county,
-        logo,
+        logo:s,
         bankName:payload.bankName,
         accountNumber:payload.accountNumber,
         accountName:payload.accountName,

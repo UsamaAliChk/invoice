@@ -34,7 +34,7 @@ export default function Pdf({Data}) {
                 <View style={style.billingContact}>
                     <View style={style.contactInfo}>
                         <Text style={{color:"#cccccc"}}>Billed To</Text>
-                        <Text style={{marginTop:'5px'}}>{Data.billing.Name}</Text>
+                        <Text style={{marginTop:'5px',textTransform:'uppercase'}}>{Data.billing.Name}</Text>
                         {
                             Data.billing.address.map(e=>{
                                 return(
@@ -50,7 +50,7 @@ export default function Pdf({Data}) {
                         </View>
                         <View style={{marginTop:"5px"}}>
                         <Text style={{color:"#8c8c8c",fontSize:'8'}}>Date of Issue</Text>
-                        <Text style={{marginTop:'5px'}}>{date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()}</Text>
+                        <Text style={{marginTop:'5px'}}>{date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()}</Text>
                         </View>
                         <View style={{marginTop:"5px"}}>
                         <Text style={{color:"#8c8c8c",fontSize:'8'}}>Due Date</Text>
@@ -111,9 +111,24 @@ export default function Pdf({Data}) {
 
                 
                 <View style={style.Total}>
+                    <View style={{alignItems:'flex-start',color:'#3385ff'}}>
+                        <Text style={{fontSize:'14',fontWeight:'bold'}}>Payment Details</Text>
+                    {
+                    Data.bankInfo.bankName!=null?
+                    <Text style={{fontSize:'10'}}>{Data.bankInfo.bankName}</Text>:<Text></Text>
+                    }
+                    {
+                    Data.bankInfo.accountNumber!=null?
+                    <Text style={{fontSize:'10'}}>Account No: {Data.bankInfo.accountNumber}</Text>:<Text></Text>
+                    }
+                    {
+                    Data.bankInfo.sortCode!=null?
+                    <Text style={{fontFamily:'Lato',fontSize:'10'}}>Sort Code: {Data.bankInfo.sortCode}</Text>:<Text></Text>
+                    }
+                </View>
                     <View style={{color:'#3385ff',paddingRight:'40px',alignItems:"flex-end"}}>
                         <Text style={{marginBottom:'5px'}}>Sub Total</Text>
-                        <Text style={{marginBottom:'5px'}}>Tax</Text>
+                        <Text style={{marginBottom:'5px'}}>Vat</Text>
                         <Text>Total</Text>
                     </View>
                     <View style={{alignItems:"flex-end"}}>
