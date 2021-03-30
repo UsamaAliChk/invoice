@@ -71,8 +71,12 @@ const Upload=async()=>{
     Body: file
   };
   try{
-  var s4=await s3.upload(params)
-    .promise()
+  var s4=await s3.upload(params,(data,err)=>{
+    if(!err) return data
+    else throw err
+  })
+
+    console.log(s4)
     return s4.Location
   }
   catch(err){
@@ -81,13 +85,13 @@ const Upload=async()=>{
 }
 
     const addNewCompany=async(payload)=>{
-        console.log("Usama Ali Khan Khna")
+        //console.log("Usama Ali Khan Khna")
         setopen(false);
         setloading(true);
         var s=await Upload();
         setlogo(s)
-      console.log(logo)
-    
+      console.log(s)
+    debugger
 
       const body={
         Cname:payload.Cname,
@@ -141,12 +145,12 @@ const Upload=async()=>{
               address1:'',
               address2:'',
               logo:'',
-              sortCode:null,
-              accountName:null,
-              accountNumber:null,
-              bankName:null,
-              swiftCode:null,
-              bicCode:null,
+              sortCode:'',
+              accountName:'',
+              accountNumber:'',
+              bankName:'',
+              swiftCode:'',
+              bicCode:'',
               vat:0
             }}
           >
@@ -177,7 +181,7 @@ const Upload=async()=>{
              </Col>
             <Col md="5">
               <FormLabel>Email</FormLabel>
-              <FormControl id="Cemail" type="text" isInvalid={!!errors.Cemail} isValid={errors.Cemail} value={values.Cemail} onChange={handleChange}></FormControl>
+              <FormControl id="Cemail" autoComplete={false} type="text" isInvalid={!!errors.Cemail} isValid={errors.Cemail} value={values.Cemail} onChange={handleChange}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.Cemail}</Form.Control.Feedback>
             </Col>
             <Col md="3">
@@ -210,7 +214,7 @@ const Upload=async()=>{
               <Form.Control.Feedback type="invalid">{errors.CNumber}</Form.Control.Feedback>
             </Col>
             <Col md="2">
-            <FormLabel>Vat Percentage</FormLabel>
+            <FormLabel>Vat</FormLabel>
               <FormControl type="text" id="vat" isInvalid={!!errors.vat} isValid={errors.vat} value={values.vat} onChange={handleChange}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.vat}</Form.Control.Feedback>
             </Col>
@@ -238,7 +242,7 @@ const Upload=async()=>{
             <Row>
               <Col md="6">
               <FormLabel>Bank Name</FormLabel>
-              <FormControl type="text" isInvalid={!!errors.bankName} isValid={errors.bankName} id="bankAccount" value={values.bankName} onChange={handleChange}></FormControl>
+              <FormControl type="text" isInvalid={!!errors.bankName} isValid={errors.bankName} id="bankName" value={values.bankName} onChange={handleChange}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.bankName}</Form.Control.Feedback>
               </Col>
               <Col md="3">

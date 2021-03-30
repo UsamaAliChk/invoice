@@ -61,9 +61,9 @@ export default function CompanyEditModel({Edit,setEdit,companyData,setloading,se
         }
         //const body={id:id1,Cname,Ccountry,Cemail,town,postalcode,address1,address2,address3,CNumber,county}
         console.log(body)
-         await axios
-          .post("http://localhost:5000/companyUpdate",body)
-          .then(res => console.log(res))
+         const s5=await axios
+          .post("https://spiretechs.co.uk:3000/companyUpdate",body)
+          .then(res => {return res})
           .catch(err => console.error(err));
           const data=await axios
             .get("https://spiretechs.co.uk:3000/companies")
@@ -87,6 +87,7 @@ export default function CompanyEditModel({Edit,setEdit,companyData,setloading,se
           Cemail:companyData.companyEmail,
           county:companyData.County,
           postalcode:companyData.postalCode,
+          CNumber:companyData.companyPhoneNumber,
           town:companyData.Town,
           address3:companyData.Address3,
           address1:companyData.Address1,
@@ -161,7 +162,7 @@ export default function CompanyEditModel({Edit,setEdit,companyData,setloading,se
               <Form.Control.Feedback type="invalid">{errors.CNumber}</Form.Control.Feedback>
             </Col>
             <Col md="2">
-            <FormLabel>Vat Percentage</FormLabel>
+            <FormLabel>Vat</FormLabel>
               <FormControl type="text" id="vat" isInvalid={!!errors.vat} isValid={errors.vat} value={values.vat} onChange={handleChange}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.vat}</Form.Control.Feedback>
             </Col>
@@ -212,7 +213,7 @@ export default function CompanyEditModel({Edit,setEdit,companyData,setloading,se
               
               <Col md="5">
               <FormLabel>Account Number</FormLabel>
-              <FormControl type="text" isInvalid={!!errors.accountNumber} isValid={errors.accountNumber} id="accountNumber" alue={values.accountNumber} onChange={handleChange}></FormControl>
+              <FormControl type="text" isInvalid={!!errors.accountNumber} isValid={errors.accountNumber} id="accountNumber" value={values.accountNumber} onChange={handleChange}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.accountNumber}</Form.Control.Feedback>
               </Col>
               <Col md="3">

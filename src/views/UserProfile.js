@@ -47,7 +47,7 @@ function User() {
   return (
   
     <>
-      <EditContact Edit={Edit} setEdit={setEdit} id1={id1} contactData={contactData} setLoading={setLoading}/>
+      <EditContact Edit={Edit} setEdit={setEdit} id1={id1} contacts={contacts} contactData={contactData} setLoading={setLoading}/>
      <AddContact IsOpen={IsOpen} data={data} setLoading={setLoading} contacts={contacts} setIsOpen={setIsOpen}/>
       {
 

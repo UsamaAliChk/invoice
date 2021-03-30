@@ -41,7 +41,7 @@ console.log(Data.billing)
                     </View>
                     <View style={{display:'flex',justifyContent:'space-between',marginTop:'5px',flexDirection:'row'}}>
                         <Text style={{marginLeft:'20px'}}>1234</Text>
-                        <Text style={{alignItems:"flex-end"}}>{date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate()}</Text>
+                        <Text style={{alignItems:"flex-end"}}>{date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()}</Text>
                     </View>
                 </View>
             </View>
