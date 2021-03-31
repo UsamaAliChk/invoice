@@ -105,16 +105,38 @@ export default function Pdf2({Data}) {
 
 
                 <View style={{display:'flex',flexDirection:'row',marginRight:'30px',marginLeft:'30px',marginTop:'17px'}}>
-                    <View style={{backgroundColor:'#92CFF6',width:'360',height:'70',alignItems:"center",justifyContent:'center',fontSize:'10'}}>
-                        <Text>THANK YOU FOR SHOPING HERE</Text>
+                    
+                        <View style={{backgroundColor:'#92CFF6',width:'360',height:'90',fontSize:'10'}}>
+                        <Text style={{marginTop:"10px",alignSelf:'center'}}>THANK YOU FOR SHOPING HERE</Text>
+                            <View style={{marginLeft:'20px',marginTop:"10px"}}>
+                            <Text style={{fontWeight:1000,fontSize:'12'}}>Payment Details</Text>
+
+                            {
+                             Data.bankInfo.bankName!=null?
+                            <Text style={{marginTop:'3px',color:'#2E2E2E',fontSize:'10'}}>{Data.bankInfo.bankName}</Text>:<Text></Text>
+                            }
+                            {
+                            Data.bankInfo.accountNumber!=null?
+                            <Text style={{fontSize:'10',color:'#2E2E2E'}}>Account No: {Data.bankInfo.accountNumber}</Text>:<Text></Text>
+                            }
+                            {
+                            Data.bankInfo.sortCode!=null?
+                            <Text style={{fontFamily:'Lato',fontSize:'10',color:'#2E2E2E'}}>Sort Code: {Data.bankInfo.sortCode}</Text>:<Text></Text>
+                            }
+
+                            
+                            
+                        </View>
                     </View>
-                    <View style={{backgroundColor:'#3973ac',width:'175',height:'70',justifyContent:'center',color:'white',alignItems:'flex-end'}}>
+                    <View style={{backgroundColor:'#3973ac',width:'175',height:'90',justifyContent:'center',color:'white',alignItems:'flex-end'}}>
                         <View style={{marginRight:'20px',alignItems:'flex-end'}}>
                         <Text style={{fontSize:'12'}}>Total</Text>
                         <Text style={{fontSize:'15'}}>£{Data.totalPrice}</Text>
                         </View>
                     </View>
                 </View>
+                <Text style={{position:'absolute',top:770,textAlign:'center',fontSize:11}}>{Data.company.name+',  Company Number '+Data.company.Number} </Text>
+                <Text style={{position:'absolute',top:785,textAlign:'center',fontSize:11}}>{Data.billing.Name+' '+Data.billing.phoneNumber+' '+Data.billing.Email} </Text>
             </Page>
         </Document>
     )

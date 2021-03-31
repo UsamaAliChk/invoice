@@ -3,7 +3,7 @@ import React from 'react'
 import {Page,View,Text,StyleSheet,Font,
     Document
 } from '@react-pdf/renderer'
-import Data from './Data';
+//import Data from '../views/Data';
 
 
 export default function Pdf({Data}) {
@@ -111,8 +111,8 @@ export default function Pdf({Data}) {
 
                 
                 <View style={style.Total}>
-                    <View style={{alignItems:'flex-start',color:'#3385ff'}}>
-                        <Text style={{fontSize:'14',fontWeight:'bold'}}>Payment Details</Text>
+                    <View style={{marginLeft:"40px"}}>
+                        <Text style={{fontSize:'14',fontWeight:'bold',color:"#39ace5"}}>Payment Details</Text>
                     {
                     Data.bankInfo.bankName!=null?
                     <Text style={{fontSize:'10'}}>{Data.bankInfo.bankName}</Text>:<Text></Text>
@@ -126,20 +126,22 @@ export default function Pdf({Data}) {
                     <Text style={{fontFamily:'Lato',fontSize:'10'}}>Sort Code: {Data.bankInfo.sortCode}</Text>:<Text></Text>
                     }
                 </View>
-                    <View style={{color:'#3385ff',paddingRight:'40px',alignItems:"flex-end"}}>
+                <View style={{display:'flex',flexDirection:'row'}}>
+                    <View style={{paddingRight:'40px',color:'#3385ff'}}>
                         <Text style={{marginBottom:'5px'}}>Sub Total</Text>
                         <Text style={{marginBottom:'5px'}}>Vat</Text>
                         <Text>Total</Text>
                     </View>
-                    <View style={{alignItems:"flex-end"}}>
+                    <View >
                         <Text style={{marginBottom:'5px'}}>£{Data.subTotal}</Text>
                         <Text style={{marginBottom:'5px'}}>£{Data.tax}</Text>
                         <Text>£{Data.totalPrice}</Text>
-                    </View>
+                    </View></View>
                 </View>
-                {/* <View>
-                <Text style={{position:'absolute',top:'70',fontSize:'11'}}>generated from siyahat</Text>
-                </View> */}
+                
+                <Text style={{position:'absolute',top:770,textAlign:'center',fontSize:11}}>{Data.company.name+',  Company Number '+Data.company.Number} </Text>
+                <Text style={{position:'absolute',top:785,textAlign:'center',fontSize:11}}>{Data.billing.Name+' '+Data.billing.phoneNumber+' '+Data.billing.Email} </Text>
+           
             </Page>
         </Document>
     )
@@ -191,6 +193,7 @@ InvoiceDetail:{
     fontSize:'10'  
 },
 PriceDetail:{
+    position:'relative',
     alignItems:'flex-end',
     fontSize:'10' 
 },
@@ -263,7 +266,8 @@ amountbox:{
 Total:{
     display:'flex',
     flexDirection:'row',
-    justifyContent:'flex-end',
+    marginLeft:'30px',
+    justifyContent:'space-between',
     marginRight:'30px',
     fontSize:'10',
     marginTop:'25px'

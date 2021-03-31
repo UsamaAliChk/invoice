@@ -9,6 +9,8 @@ import {Col, Row,Badge,
 import { Link } from "react-router-dom";
 import Loader  from 'react-loader-spinner'
 
+import ShowList from './ShowList'
+
 function Maps() {
   const [Caddress,setCaddress]=useState([]);
   const contacts=useSelector(state=>state.getContacts)
@@ -28,45 +30,6 @@ const canAdd=description.length>0 && qty!==0 && price!==0;
 const isEnabled=canAdd && selectedMemberId!==''
 
 
-// useEffect(()=>{
-//   //console.log(selectedCompany)
-//   let companyAddress=[]
-//   if(selectedCompany[0].Address1!==null){
-//     companyAddress.push(selectedCompany[0].Address1);
-//   }
-//   if(selectedCompany[0].Address2!==null){
-//     companyAddress.push(selectedCompany[0].Address2);
-//   }
-//   if(selectedCompany[0].Address3!==null){
-//     companyAddress.push(selectedCompany[0].Address3);
-//   }
-//   if(selectedCompany[0].Address4!==null){
-//     companyAddress.push(selectedCompany[0].Address4);
-//   }
-//   setCaddress(companyAddress);
-
-// })
-
-
-
-const handelDelete=async(index)=>{
-//  console.log("index is ",index)
-  let Total=totalPrice;
-     let data=[]
-     for(let i=0;i<items.length;i++){
-       if(i===index){
-          Total=Total-items[i].total
-          //console.log(total)
-           settotalPrice(Total)
-          //continue;
-       }
-       else
-        data.push(items[i])
-     }
-     //console.log(data)
-      setitems(data)
-      //console.log(items)
-}
 
 
 const handelClick=()=>{
@@ -210,34 +173,7 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                   </Form.Control>
                 </Col>
                 </Row>
-              {
-                (items!==[])?
-                items.map((e,i)=>{
-                  return(
-                    <div style={{marginBottom:"20px"}} key={i}>
-                        <Row>
-                          <Col md="5">
-                            <Form.Control as="textarea" rows={3} defaultValue={e.description}></Form.Control>
-                          </Col>
-                          <Col md="1">
-                            <Form.Control type="text" defaultValue={e.qty}></Form.Control>
-                          </Col>
-                          <Col md="2">
-                       
-                            <Form.Control type="text" defaultValue={e.price}></Form.Control>
-                          </Col>
-                          <Col md="1">
-                           
-                            <Form.Control defaultValue={e.total} disabled></Form.Control>
-                          </Col>
-                          <Col md="1">
-                              <Button variant="danger" id={i} onClick={e=>{handelDelete(parseInt(e.target.id))}} >DELETE</Button>
-                          </Col>
-                        </Row>
-                    </div>
-                  )
-                }):null
-              }
+              <ShowList items={items} tax={tax} setitems={setitems} total={totalPrice} settotalPrice={settotalPrice} settax={settax} vat={selectedCompany[0].vat}/>
 
               <Row>
                 <Col md="6">
@@ -274,17 +210,15 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                       let total2=totalPrice+total;
                       s5=total2
                       settotalPrice(total2); 
-                      setitems(old=>[...old,{description,qty,price,total}])}
+                      setitems(old=>[...old,{description,qty,price,total,id:Math.random()}])}
                       else{
-                        setitems(old=>[...old,{description,qty:0,price:0,total:0}])
+                        setitems(old=>[...old,{description,qty:0,price:0,total:0,id:Math.random()}])
                       }
                       
                       if(selectedCompany[0].vat!==null){
                         let p2=parseInt(selectedCompany[0].vat);
-                        let per=(s5*p2)/100; 
-                        console.log(per)                       
+                        let per=(s5*p2)/100;                       
                         settax(per)
-                        console.log(tax)
                       }
                         else{
                         settax(0)

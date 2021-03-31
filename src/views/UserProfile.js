@@ -112,9 +112,9 @@ function User() {
                       </Form.Group>
                     </Col>
                   </Row>
-                  <Row>
+                  <Row >
                     
-                    <Col className="px-1" md="4">
+                    <Col className="px-1" md="4" style={{marginLeft:'12px'}}>
                       <Form.Group>
                         <label>Country</label>
                         <Form.Control
@@ -137,20 +137,7 @@ function User() {
                       </Form.Group>
                     </Col>
                   </Row>
-                  <Row>
-                    <Col md="12">
-                      <Form.Group>
-                        <label>About</label>
-                        <Form.Control
-                          cols="80"
-                          defaultValue="Samways, Inc. is a Pakistani online travel company that operates a website and mobile app with user-generated content and a comparison shopping website.It also offers online hotel reservations and bookings for transportation, lodging, travel experiences, and restaurants."
-                          placeholder="Here can be your description"
-                          rows="4"
-                          as="textarea"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                  </Row>
+                
 
         
                   {/* <Button
@@ -184,14 +171,12 @@ function User() {
                       className="avatar border-gray"
                       src={data[0].logoUrl}
                     ></img>
-                    <h5 className="title">SAMWAYS</h5>
+                    <h5 className="title" style={{textTransform:'uppercase'}}>{data[0].companyName}</h5>
                   </a>
-                  <p className="description">michael24</p>
+                  <p className="description">{data[0].companyEmail}</p>
                 </div>
                 <p className="description text-center">
-                  "Lamborghini Mercy <br></br>
-                  Your chick she so thirsty <br></br>
-                  I'm in that two seat Lambo"
+                  {data[0].companyPhoneNumber}
                 </p>
               </Card.Body>
               <hr></hr>
@@ -271,7 +256,7 @@ function User() {
                 
               <Col md="4">
                 <Row>
-                <Link to={"maps"}><Button style={{marginLeft:"15px",width:"320px",marginTop:'-180px'}}>GENERATE INVOICE</Button></Link>
+                <Link to={"maps"}><Button style={{marginLeft:"15px",width:"320px",marginTop:'0px'}}>GENERATE INVOICE</Button></Link>
                 </Row>
               
               </Col>

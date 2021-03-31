@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import { pdf } from "@react-pdf/renderer";
 import {useSelector} from 'react-redux'
-import Report from './Report'
-import Pdf2 from './Pdf2'
-import Pdf from './Pdf';
+import Report from '../PDFS/Report'
+import Pdf2 from '../PDFS/Pdf2'
+import Pdf from '../PDFS/Pdf';
 import {
     Button
   } from "react-bootstrap";
