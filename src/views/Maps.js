@@ -28,24 +28,24 @@ const canAdd=description.length>0 && qty!==0 && price!==0;
 const isEnabled=canAdd && selectedMemberId!==''
 
 
-useEffect(()=>{
-  //console.log(selectedCompany)
-  let companyAddress=[]
-  if(selectedCompany[0].Address1!==null){
-    companyAddress.push(selectedCompany[0].Address1);
-  }
-  if(selectedCompany[0].Address2!==null){
-    companyAddress.push(selectedCompany[0].Address2);
-  }
-  if(selectedCompany[0].Address3!==null){
-    companyAddress.push(selectedCompany[0].Address3);
-  }
-  if(selectedCompany[0].Address4!==null){
-    companyAddress.push(selectedCompany[0].Address4);
-  }
-  setCaddress(companyAddress);
+// useEffect(()=>{
+//   //console.log(selectedCompany)
+//   let companyAddress=[]
+//   if(selectedCompany[0].Address1!==null){
+//     companyAddress.push(selectedCompany[0].Address1);
+//   }
+//   if(selectedCompany[0].Address2!==null){
+//     companyAddress.push(selectedCompany[0].Address2);
+//   }
+//   if(selectedCompany[0].Address3!==null){
+//     companyAddress.push(selectedCompany[0].Address3);
+//   }
+//   if(selectedCompany[0].Address4!==null){
+//     companyAddress.push(selectedCompany[0].Address4);
+//   }
+//   setCaddress(companyAddress);
 
-})
+// })
 
 
 
@@ -56,13 +56,16 @@ const handelDelete=async(index)=>{
      for(let i=0;i<items.length;i++){
        if(i===index){
           Total=Total-items[i].total
-          await settotalPrice(Total)
-          continue;
+          //console.log(total)
+           settotalPrice(Total)
+          //continue;
        }
        else
         data.push(items[i])
      }
-     await setitems(data)
+     //console.log(data)
+      setitems(data)
+      //console.log(items)
 }
 
 

@@ -22,7 +22,7 @@ export default function PDFView() {
     const [pdfBlob,setpdfBlob]=useState('');
     const [enable,setenable]=useState(false)
     let date=new Date();
-    let issuedDate=date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()
+    let issuedDate=date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()
    // const access='';
     const access = new Credentials({
         accessKeyId: "AKIA5UT2A32QWWX76HOF",
