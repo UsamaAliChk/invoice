@@ -140,7 +140,7 @@ export default function Pdf({Data}) {
                 </View>
                 
                 <Text style={{position:'absolute',top:770,textAlign:'center',fontSize:11}}>{Data.company.name+',  Company Number '+Data.company.Number} </Text>
-                <Text style={{position:'absolute',top:785,textAlign:'center',fontSize:11}}>{Data.billing.Name+' '+Data.billing.phoneNumber+' '+Data.billing.Email} </Text>
+                <Text style={{position:'absolute',top:785,textAlign:'center',fontSize:11}}>{Data.company.CPName+' '+Data.company.CPNumber+' '+Data.company.CPEmail} </Text>
            
             </Page>
         </Document>

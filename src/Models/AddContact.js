@@ -43,11 +43,12 @@ const valScheema = Yup.object({
   CNumber:Yup.string().required("Required field"),
   address1:Yup.string().required("Required field"),
   address2:Yup.string(),
+  companyName:Yup.string().required(),
   address3:Yup.string(),
   Ccountry:Yup.string().required(),
   county:Yup.string(),
   town:Yup.string().required(),
-  postalcode:Yup.string().required()
+  postalcode:Yup.string()
 })
 
 
@@ -59,7 +60,8 @@ const addnewcontact=async(payload)=>{
     setLoading(true);
   const body={id:data[0].companyId,title:payload.title,
     first:payload.first,last:payload.last,Ccountry:payload.Ccountry,
-    Cemail:payload.Cemail
+    Cemail:payload.Cemail,
+    companyName:payload.companyName
     ,town:payload.town,postalcode:payload.postalcode
     ,address1:payload.address1,address2:payload.address2,address3:payload.address3,CNumber:payload.CNumber,
     county:payload.county}
@@ -92,6 +94,7 @@ const addnewcontact=async(payload)=>{
               Ccountry:'',
               Cemail:'',
               county:'',
+              companyName:'',
               postalcode:'',
               town:'',
               address3:'',
@@ -123,20 +126,26 @@ const addnewcontact=async(payload)=>{
         <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Row>
-            <Col md="4">
+            <Col md="2">
               <FormLabel>Title</FormLabel>
               <FormControl id="title" type="text" value={values.title} isInvalid={!!errors.title}  onChange={handleChange} isValid={errors.title}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.title}</Form.Control.Feedback>
              </Col>
-             <Col md="4">
+             <Col md="3">
               <FormLabel>First Name</FormLabel>
               <FormControl id="first" type="text" value={values.first} onChange={handleChange} isValid={errors.first} isInvalid={!!errors.first}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.first}</Form.Control.Feedback>
              </Col>
-             <Col md="4">
+            
+             <Col md="3">
               <FormLabel>Last Name</FormLabel>
               <FormControl id="last" isInvalid={!!errors.last} isValid={errors.last} type="text" value={values.last} onChange={handleChange}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.last}</Form.Control.Feedback>
+             </Col>
+             <Col md="4">
+             <FormLabel>Company Name</FormLabel>
+              <FormControl id="companyName" type="text" value={values.companyName} onChange={handleChange} isValid={errors.companyName} isInvalid={!!errors.companyName}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.companyName}</Form.Control.Feedback>
              </Col>
           </Row>
           <Row>

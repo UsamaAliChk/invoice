@@ -32,7 +32,7 @@ const isEnabled=canAdd && selectedMemberId!==''
 
 
 
-const handelClick=()=>{
+const handelClick=async()=>{
 
   let companyAddress=[]
   if(selectedCompany[0].Address1!==null){
@@ -48,7 +48,10 @@ const handelClick=()=>{
     companyAddress.push(selectedCompany[0].Address4);
   }
 
-  let company={name:selectedCompany[0].companyName,PostalCode:selectedCompany[0].postalCode,Country:selectedCompany[0].Country,Email:selectedCompany[0].companyEmai
+  let company={name:selectedCompany[0].companyName,CPName:selectedCompany[0].chairPersonName,
+    CPEmail:selectedCompany[0].chairPersonEmail,
+    CPNumber:selectedCompany[0].chairPersonNumber
+    ,PostalCode:selectedCompany[0].postalCode,Country:selectedCompany[0].Country,Email:selectedCompany[0].companyEmai
     ,Town:selectedCompany.Town,companyAddress,Number:selectedCompany[0].companyPhoneNumber};
 
     
@@ -114,23 +117,18 @@ const handelClick=()=>{
   // if(selectedCompany[0].swiftCode!==null){
   //   bankInfo.push(selectedCompany[0].swiftCode);
   // }
-let p1=totalPrice
 
-let per,p2=''
-console.log(selectedCompany[0].vat)
-if(selectedCompany[0].vat!==null){
- p2=parseInt(selectedCompany[0].vat);
- per=(totalPrice*p2)/100;}
-else{
-   p2=0;
- per=0;
-}
+ 
+
+  //console.log(invoices);
+
+let p1=totalPrice
 
 
 let billing={Name,Town:t,PostalCode:p,Country:con,phoneNumber,address,contactCompanyName,Email,id}
 //console.log(billing)
 
-  dispatch(setData({bankInfo,company,dueDate,billing,tax:per,items,subTotal:p1,totalPrice:totalPrice+per}))
+  dispatch(setData({bankInfo,company,dueDate,billing,tax,items,vat:selectedCompany[0].vat,subTotal:p1,totalPrice:totalPrice+tax}))
 }
 const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', position: 'fixed', verticalAlign: 'middle', left:'0px', top: '0px', width:'100%', height:'100%', backgroundColor: 'rgba(0,0,0,0.2)'}
   return (
@@ -168,8 +166,8 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                   </Form.Control>
                 </Col>
                 <Col md="4">
-                  <Form.Label>Tax</Form.Label>
-                  <Form.Control type="text" value={tax}>
+                  <Form.Label>Vat Rate</Form.Label>
+                  <Form.Control type="text" disabled value={selectedCompany[0].vat+"%"}>
                   </Form.Control>
                 </Col>
                 </Row>
@@ -228,8 +226,26 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                       }} disabled={!canAdd}>ADD</Button>
                 </Col>
               </Row>
-              <Row>
-                <Link to={'notifications'}><Button style={{marginTop:"20px",marginLeft:"15px",color:'black'}} onClick={handelClick} disabled={!isEnabled}>CREATE</Button></Link>
+              
+              <Row style={{marginTop:"20px"}}>
+                <Col md="4" >
+                <Link to={'notifications'}><Button style={{marginLeft:"15px",color:'black'}} onClick={handelClick} disabled={!isEnabled}>CREATE</Button></Link>
+                </Col>
+                <Col md="6" style={{marginLeft:'100px'}}>
+                  <Row >
+                    <Col><p style={{marginLeft:'80px',marginTop:'3px'}}>Sub Total</p></Col> 
+                    <Col><Form.Control type="Text" value={totalPrice} disabled></Form.Control></Col>
+                  </Row>
+                  <Row style={{marginTop:"10px"}}>
+                    <Col ><p style={{marginLeft:'80px',marginTop:'3px'}}>Vat</p></Col> 
+                    <Col><Form.Control type="Text" value={tax} disabled></Form.Control></Col>
+                  </Row>
+                  <Row>
+                    <Col><p style={{marginLeft:'80px',marginTop:'3px'}}>Total</p></Col> 
+                    <Col><Form.Control type="Text" value={totalPrice+tax} disabled></Form.Control></Col>
+                  </Row>
+                 
+                  </Col>
               </Row>
             </Form>
           </Col>

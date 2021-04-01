@@ -32,8 +32,11 @@ export default function CompanyAddModel({open,setopen,setallCompanies,setcompnie
 
 
     const valScheema = Yup.object({
+      name:Yup.string().required(),
+      cpEmail:Yup.string().required(),
+      cpNumber:Yup.string().required(),
       Cname:Yup.string().required("Required field"),
-      Cemail:Yup.string().email().required("Required field"),
+      Cemail:Yup.string().email(),
       CNumber:Yup.string().required("Required field"),
       address1:Yup.string().required("Required field"),
       address2:Yup.string(),
@@ -41,7 +44,7 @@ export default function CompanyAddModel({open,setopen,setallCompanies,setcompnie
       Ccountry:Yup.string().required(),
       county:Yup.string(),
       town:Yup.string().required(),
-      postalcode:Yup.string().required(),
+      postalcode:Yup.string(),
       logo:Yup.string(),
       bankName:Yup.string(),
       accountNumber:Yup.string(),
@@ -100,6 +103,9 @@ const Upload=async()=>{
         CNumber:payload.CNumber,
         county:payload.county,
         logo:s,
+        name:payload.name,
+        cpEmail:payload.cpEmail,
+        cpNumber:payload.cpNumber,
         bankName:payload.bankName,
         accountNumber:payload.accountNumber,
         accountName:payload.accountName,
@@ -139,6 +145,9 @@ const Upload=async()=>{
               address3:'',
               address1:'',
               address2:'',
+              name:'',
+              cpEmail:'',
+              cpNumber:'',
               logo:'',
               sortCode:'',
               accountName:'',
@@ -186,6 +195,23 @@ const Upload=async()=>{
             </Col>
           </Row>
           <Row>
+            <Col md="4">
+            <FormLabel>CEO Name</FormLabel>
+              <FormControl id="name" autoComplete={false} type="text" isInvalid={!!errors.name} isValid={errors.name} value={values.name} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
+            </Col>
+            <Col md="4">
+            <FormLabel>CEO Email</FormLabel>
+              <FormControl id="cpEmail" autoComplete={false} type="text" isInvalid={!!errors.cpEmail} isValid={errors.cpEmail} value={values.cpEmail} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.cpEmail}</Form.Control.Feedback>
+            </Col>
+            <Col md="4">
+            <FormLabel>CEO Number</FormLabel>
+              <FormControl id="cpNumber" autoComplete={false} type="text" isInvalid={!!errors.cpNumber} isValid={errors.name} value={values.cpNumber} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.cpNumber}</Form.Control.Feedback>
+            </Col>
+          </Row>
+          <Row>
             <Col md="6">
             <FormLabel>Address 1</FormLabel>
               <FormControl type="text" id="address1" isInvalid={!!errors.address1} isValid={errors.address1} value={values.address1} onChange={handleChange}></FormControl>
@@ -204,7 +230,7 @@ const Upload=async()=>{
               <Form.Control.Feedback type="invalid">{errors.address3}</Form.Control.Feedback>
             </Col>
             <Col md="5">
-            <FormLabel>Phone Number</FormLabel>
+            <FormLabel>Company Number</FormLabel>
               <FormControl type="text" id="CNumber" isInvalid={!!errors.CNumber} isValid={errors.CNumber} value={values.CNumber} onChange={handleChange}></FormControl>
               <Form.Control.Feedback type="invalid">{errors.CNumber}</Form.Control.Feedback>
             </Col>

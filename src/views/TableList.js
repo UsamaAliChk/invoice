@@ -89,7 +89,12 @@ const searchByName=(value)=>{
       .get("https://spiretechs.co.uk:3000/companies")
       .then(res => {console.log(res.data); return res.data})
       .catch(err => console.error(err));
-      setcompnies(data);
+      let invoices=await axios.get("https://spiretechs.co.uk:3000/getNoOfInvoices")
+      .then(res=>{return res.data})
+      .catch(err=>console.log(err))
+      localStorage.setItem("invoiceNo",(invoices.no_Of_invoices+1).toString());
+
+      setcompnies(data)
       setallCompanies(data);
       setloading(false);
       console.log(data)

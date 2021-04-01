@@ -13,8 +13,9 @@ export default function Documnet1({Data}) {
 
    
     let date=new Date();
-console.log(Data.billing)
+//console.log(Data,invoiceNo)
     console.log(date.getYear())
+    let invoiceNo=localStorage.getItem("invoiceNo")
     return (
        <Document>
          <Page wrap>
@@ -40,8 +41,10 @@ console.log(Data.billing)
                         <Text style={{marginRight:'3px'}}>Date</Text>
                     </View>
                     <View style={{display:'flex',justifyContent:'space-between',marginTop:'5px',flexDirection:'row'}}>
-                        <Text style={{marginLeft:'20px'}}>1234</Text>
-                        <Text style={{alignItems:"flex-end"}}>{date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()}</Text>
+                    <View style={{alignItems:'center',width:'75px'}} >
+                        <Text >{invoiceNo}</Text>
+                        </View>
+                        <Text style={{alignItems:'flex-end'}}>{date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()}</Text>
                     </View>
                 </View>
             </View>
@@ -81,7 +84,7 @@ console.log(Data.billing)
 
             <View style={style.priceTitles}>
                 <View style={style.description}>
-                    <Text>Desription</Text>
+                    <Text style={{marginLeft:"20px"}}>Desription</Text>
                 </View>
                 <View style={style.qty}>
                     <Text>QTY</Text>
@@ -193,6 +196,7 @@ console.log(Data.billing)
                 
                 <View style={style.subTotal}>
                     <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>Sub Total</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>Vat Rate</Text>
                     <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>Vat</Text>
                     <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>Total</Text>
                 
@@ -200,13 +204,14 @@ console.log(Data.billing)
                 <View style={style.total}>
 
                     
-                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>£ {Data.subTotal}</Text>
-                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>£ {Data.tax}</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>{Data.subTotal}</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>{Data.vat+"%"}</Text>
+                    <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>{Data.tax}</Text>
                     <Text style={{marginTop:'5px',fontFamily:'Lato',fontSize:'10'}}>£ {Data.totalPrice}</Text>
                 </View>
             </View>
                 <Text style={{position:'absolute',top:770,textAlign:'center',fontSize:11,fontFamily:'Lato'}}>{Data.company.name+',  Company Number '+Data.company.Number} </Text>
-                <Text style={{position:'absolute',top:785,textAlign:'center',fontSize:11,fontFamily:'Lato'}}>{Data.billing.Name+' '+Data.billing.phoneNumber+' '+Data.billing.Email} </Text>
+                <Text style={{position:'absolute',top:785,textAlign:'center',fontSize:11,fontFamily:'Lato'}}>{Data.company.CPName+'  '+Data.company.CPNumber+'  '+Data.company.CPEmail} </Text>
             </View>
             
         </Page>
@@ -334,12 +339,12 @@ var style=StyleSheet.create({
     },
     id:{
         marginTop:'10px',
-        width:'70px',
-        alignItems:'flex-start'
+        width:'30px',
+        alignItems:'center'
     },
     userterm:{
         marginTop:'10px',
-        width:'84px',
+        width:'125px',
         alignItems:'flex-end',
         fontFamily:'Lato'
     },
@@ -440,7 +445,8 @@ var style=StyleSheet.create({
         display:'flex',
         flexDirection:'column',
         width:'125px',
-        textAlign:'center',
+        alignItems:'flex-start',
+        
         backgroundColor:'#cce6ff',
         justifyContent:'space-between'
     },
@@ -448,7 +454,8 @@ var style=StyleSheet.create({
         display:'flex',
         flexDirection:'column',
         flex:1,
-        textAlign:'center',
+        textAlign:'left',
+
         backgroundColor:'#e6f7ff',
         justifyContent:'space-between'
     }    

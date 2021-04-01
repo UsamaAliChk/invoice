@@ -173,10 +173,10 @@ function User() {
                     ></img>
                     <h5 className="title" style={{textTransform:'uppercase'}}>{data[0].companyName}</h5>
                   </a>
-                  <p className="description">{data[0].companyEmail}</p>
+                  <p className="description">{data[0].chairPersonName}</p>
                 </div>
                 <p className="description text-center">
-                  {data[0].companyPhoneNumber}
+                  {data[0].chairPersonEmail}
                 </p>
               </Card.Body>
               <hr></hr>

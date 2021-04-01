@@ -15,6 +15,9 @@ export default function CompanyEditModel({Edit,setEdit,companyData,setloading,se
    
 
     const valScheema = Yup.object({
+      name:Yup.string().required(),
+      cpEmail:Yup.string().required(),
+      cpNumber:Yup.string().required(),
       Cname:Yup.string().required("Required field"),
       Cemail:Yup.string().email().required("Required field"),
       CNumber:Yup.string().required("Required field"),
@@ -50,11 +53,15 @@ export default function CompanyEditModel({Edit,setEdit,companyData,setloading,se
           address2:payload.address2,
           address3:payload.address3,
           CNumber:payload.CNumber,
+          name:payload.name,
+        cpEmail:payload.cpEmail,
+        cpNumber:payload.cpNumber,
           county:payload.county, 
           bankName:payload.bankName,
           accountNumber:payload.accountNumber,
           accountName:payload.accountName,
           bicCode:payload.bicCode,
+      
           swiftCode:payload.swiftCode,
           sortCode:payload.sortCode,
           vat:payload.vat
@@ -89,6 +96,9 @@ export default function CompanyEditModel({Edit,setEdit,companyData,setloading,se
           postalcode:companyData.postalCode,
           CNumber:companyData.companyPhoneNumber,
           town:companyData.Town,
+          name:companyData.chairPersonName,
+          cpEmail:companyData.chairPersonEmail,
+          cpNumber:companyData.chairPersonNumber,
           address3:companyData.Address3,
           address1:companyData.Address1,
           address2:companyData.Address2,
@@ -137,6 +147,23 @@ export default function CompanyEditModel({Edit,setEdit,companyData,setloading,se
           <Form.Control.Feedback type="invalid">{errors.postalcode}</Form.Control.Feedback>
         </Col>
       </Row>
+      <Row>
+            <Col md="4">
+            <FormLabel>CEO Name</FormLabel>
+              <FormControl id="name" autoComplete={false} type="text" isInvalid={!!errors.name} isValid={errors.name} value={values.name} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
+            </Col>
+            <Col md="4">
+            <FormLabel>CEO Email</FormLabel>
+              <FormControl id="cpEmail" autoComplete={false} type="text" isInvalid={!!errors.cpEmail} isValid={errors.cpEmail} value={values.cpEmail} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.cpEmail}</Form.Control.Feedback>
+            </Col>
+            <Col md="4">
+            <FormLabel>CEO Number</FormLabel>
+              <FormControl id="cpNumber" autoComplete={false} type="text" isInvalid={!!errors.cpNumber} isValid={errors.name} value={values.cpNumber} onChange={handleChange}></FormControl>
+              <Form.Control.Feedback type="invalid">{errors.cpNumber}</Form.Control.Feedback>
+            </Col>
+          </Row>
       <Row>
         <Col md="6">
         <FormLabel>Address 1</FormLabel>

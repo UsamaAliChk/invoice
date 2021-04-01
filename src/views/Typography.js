@@ -5,7 +5,7 @@ import Report from '../PDFS/Report'
 import Pdf2 from '../PDFS/Pdf2'
 import Pdf from '../PDFS/Pdf';
 import {
-    Button
+    Button,Row,Col
   } from "react-bootstrap";
 
 import S3 from "aws-sdk/clients/s3";
@@ -20,7 +20,9 @@ export default function PDFView() {
     const type=localStorage.getItem('type')
     const [pdfLink,setpdfLink]=useState('')
     const [pdfBlob,setpdfBlob]=useState('');
+    const [link,setlink]=useState('');
     const [enable,setenable]=useState(false)
+    const [invoiceNo,setinvoiceNo]=useState('')
     let date=new Date();
     let issuedDate=date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()
    // const access='';
@@ -51,18 +53,29 @@ export default function PDFView() {
         }
     }
 
+    const sendEmail=()=>{
+      axios
+        .post("https://jsa878cs45.execute-api.eu-west-2.amazonaws.com/pdf/sendpdf",{name:data.billing.Name,companyName:data.company.name,emailAddress:data.billing.Email,link})
+        .then(res => {console.log(res)})
+        .catch(err => console.error(err));
+    }
+
     const handelSave=async()=>{
       setloading(true)
         const link=await Upload()
-        console.log(data)
+        
         let body={companyName:data.company.name,contactName:data.billing.Name,issuedDate,dueDate:data.dueDate,link}
-        console.log("USAMA ALI KAHN",body)
+       
         
         const s=await axios
           .post("https://spiretechs.co.uk:3000/invoice",body)
           .then(res => {return res})
           .catch(err => console.error(err));
-        console.log(link)
+          let invoices=await axios.get("https://spiretechs.co.uk:3000/getNoOfInvoices")
+          .then(res=>{return res.data})
+          .catch(err=>console.log(err))
+          localStorage.setItem("invoiceNo",(invoices.no_Of_invoices+1).toString());
+        setlink(link);
         setenable(true)
         setloading(false)
     }
@@ -91,14 +104,26 @@ export default function PDFView() {
               setpdfBlob(blob);
         }
     }
+
+   
+
     useEffect(()=>{
+     
         openpdf()
         alert("It will not be auto saved")
     },[])
     return (
       loading?<Loader show={true}/>:
         <div>
-            <Button disabled={enable} onClick={e=>{handelSave()}}>SAVE</Button>
+          <Row>
+            <Col md="4">
+            <Button disabled={enable} onClick={e=>{handelSave()}} style={{color:'black'}}>SAVE</Button>
+            </Col>
+            <Col md="4">
+            <Button disabled={!enable} onClick={e=>{sendEmail()}} style={{color:'black'}}>Send Email</Button>
+            </Col>
+          </Row>
+            
             <iframe style={{ width: "100%", height: "600px" }} src={pdfLink}></iframe>
         </div>
     )
