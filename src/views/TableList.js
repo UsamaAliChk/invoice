@@ -151,7 +151,7 @@ const searchByName=(value)=>{
                           <tr>
                             <td><img src={e.logoUrl} style={{height:"50px",width:"50px"}} /></td>
                             <td ><Link to={'user'} onClick={e1=>{handelClick(e.companyId)}} style={{textTransform:'uppercase'}}>{e.companyName}</Link></td>
-                            <td>{e.companyEmail}</td>
+                            <td>{e.chairPersonName}</td>
                             <td style={{textTransform:'uppercase'}}>{e.Country}</td>
                             <td className="editIcon" onClick={e1=>{editCompnay(e.companyId)}}><i class="far fa-edit"></i></td>
                         </tr>
