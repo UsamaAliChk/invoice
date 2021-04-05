@@ -811,3 +811,24 @@
     display: block;
     width: 100%;
 }
+
+.modal-top{
+  width:100%;
+  height:70px ; 
+  background-color:black;
+  border-Radius:15px;
+  color: white;
+  text-align: center;
+  justify-content: center;
+  margin-left: 5px;
+}
+.modal-image{
+    margin-top: 10px;
+    height: 400px;
+    width: 485px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+.space-btw-inputs{
+  margin-top: 30px;
+}

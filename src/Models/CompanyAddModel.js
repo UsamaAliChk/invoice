@@ -47,34 +47,33 @@ const Upload=async()=>{
 }
 
     const addNewCompany=async()=>{
-        let bankdata=JSON.parse(localStorage.getItem("bankdata"))
+        let companyAddress=JSON.parse(localStorage.getItem("companyAddress"))
         setopen(false);
         setloading(true);
-        console.log(bankdata)
-        console.log(companydata)
+       
         var s=await Upload(); 
       const body={
         Cname:companydata.Cname,
-        Ccountry:companydata.Ccountry,
+        Ccountry:companyAddress.Ccountry,
         Cemail:companydata.Cemail,
-        town:companydata.town,
+        town:companyAddress.town,
         postalcode:"123456",
-        address1:companydata.address1,
-        address2:companydata.address2,
-        address3:companydata.address3,
+        address1:companyAddress.address1,
+        address2:companyAddress.address2,
+        address3:companyAddress.address3,
         CNumber:companydata.CNumber,
         county:"",
         logo:s,
-        name:bankdata.name,
-        cpEmail:bankdata.cpEmail,
-        cpNumber:bankdata.cpNumber,
-        bankName:bankdata.bankName,
-        accountNumber:bankdata.accountNumber,
-        accountName:bankdata.accountName,
-        bicCode:bankdata.bicCode,
-        swiftCode:bankdata.swiftCode,
-        sortCode:bankdata.sortCode,
-        vat:bankdata.vat
+        name:companydata.name,
+        cpEmail:companydata.cpEmail,
+        cpNumber:companydata.cpNumber,
+        // bankName:bankdata.bankName,
+        // accountNumber:bankdata.accountNumber,
+        // accountName:bankdata.accountName,
+        // bicCode:bankdata.bicCode,
+        // swiftCode:bankdata.swiftCode,
+        // sortCode:bankdata.sortCode,
+        // vat:bankdata.vat
       }
         //console.log(body)
         await axios

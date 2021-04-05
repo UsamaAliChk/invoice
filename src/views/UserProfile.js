@@ -136,6 +136,9 @@ function User() {
                         ></Form.Control>
                       </Form.Group>
                     </Col>
+                    <Col md="4">
+                      <Button>Add Account Details</Button>                    
+                    </Col>
                   </Row>
                 
 
