@@ -11,10 +11,21 @@ import Italic from '../fonts/Roboto-Italic.ttf'
 import Lato from '../fonts/Lato-Regular.ttf'
 export default function Documnet1({Data}) {
 
-   
-    let date=new Date();
-//console.log(Data,invoiceNo)
-    console.log(date.getYear())
+    const formatDate=()=> {
+        var d = new Date(),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+    
+        return [day, month, year].join('-');
+    }
+
+    let date=formatDate()
     let invoiceNo=localStorage.getItem("invoiceNo")
     return (
        <Document>
@@ -44,7 +55,7 @@ export default function Documnet1({Data}) {
                     <View style={{alignItems:'center',width:'75px'}} >
                         <Text >{invoiceNo}</Text>
                         </View>
-                        <Text style={{alignItems:'flex-end'}}>{date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear()}</Text>
+                        <Text style={{alignItems:'flex-end'}}>{date}</Text>
                     </View>
                 </View>
             </View>
