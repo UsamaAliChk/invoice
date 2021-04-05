@@ -85,7 +85,7 @@ export default function GetBankInfo({setbankData,setopen2,open2,addNewCompany,se
                 isSubmitting,
                 isValidating
               })=>(
-                <Modal show={open2} size="lg">
+                <Modal show={open2} size="xl">
                     <Modal.Header>Compnay Info</Modal.Header>
                         <Modal.Body>
                             <Form onSubmit={handleSubmit}>

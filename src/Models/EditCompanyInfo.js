@@ -76,7 +76,7 @@ export default function EditCompnayInfo({open,setopen2,setopen,setcompanyData,co
                 isSubmitting,
                 isValidating
               })=>(
-                <Modal show={open} size="lg">
+                <Modal show={open} size="xl">
                     <Modal.Header>Compnay Info</Modal.Header>
                         <Modal.Body>
                             <Form onSubmit={handleSubmit}>
