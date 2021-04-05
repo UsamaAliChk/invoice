@@ -162,7 +162,14 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                 </Col>
                 <Col md="4">
                   <Form.Label>Due Date</Form.Label>
-                  <Form.Control type="date" onChange={e=>setdueDate(e.target.value)}>
+                  <Form.Control type="date" onChange={e=>{
+                    let d=e.target.value.toString();
+                    let y=d.slice(0,4);
+                    let m=d.slice(5,7)
+                    let day=d.slice(8,10);
+                    let s=day+"-"+m+"-"+y
+                    setdueDate(s)
+                    }}>
                   </Form.Control>
                 </Col>
                 <Col md="4">

@@ -25,7 +25,9 @@ const [IsOpen,setIsOpen]=useState(false)
 const [companyData,setcompanyData]=useState('');
 const [Edit,setEdit]=useState(false);
 const [id1,setid1]=useState();
-
+const [first,setfirst]=useState(false)
+const [second,setseconf]=useState(false)
+const [third,setthird]=useState(false)
 const editCompnay=(id)=>{
     let s={}
     for(let i=0;i<companies.length;i++){
@@ -109,7 +111,7 @@ const searchByName=(value)=>{
   return (
       <>
     <CompanyEditModel setCompanies={setcompnies} setallCompanies={setallCompanies} Edit={Edit} setEdit={setEdit} setloading={setloading} id1={id1} companyData={companyData}/>
-    <CompanyAddModel open={IsOpen} setopen={setIsOpen} setloading={setloading} setcompnies={setcompnies} setallCompanies={setallCompanies}/>
+    <CompanyAddModel open={IsOpen}  setopen={setIsOpen} setloading={setloading} setcompnies={setcompnies} setallCompanies={setallCompanies}/>
 
       {
         loading?
@@ -149,7 +151,7 @@ const searchByName=(value)=>{
                       companies.map(e=>{
                         return (
                           <tr>
-                            <td><img src={e.logoUrl} style={{height:"50px",width:"50px"}} /></td>
+                            <td><img src={e.logoUrl} style={{height:"30px",width:"auto"}} /></td>
                             <td ><Link to={'user'} onClick={e1=>{handelClick(e.companyId)}} style={{textTransform:'uppercase'}}>{e.companyName}</Link></td>
                             <td>{e.chairPersonName}</td>
                             <td style={{textTransform:'uppercase'}}>{e.Country}</td>

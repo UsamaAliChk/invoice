@@ -44,7 +44,7 @@ export default function Documnet1({Data}) {
                     <View style={{alignItems:'center',width:'75px'}} >
                         <Text >{invoiceNo}</Text>
                         </View>
-                        <Text style={{alignItems:'flex-end'}}>{date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()}</Text>
+                        <Text style={{alignItems:'flex-end'}}>{date.getDate()+'-'+(date.getMonth()+1)+'-'+date.getFullYear()}</Text>
                     </View>
                 </View>
             </View>

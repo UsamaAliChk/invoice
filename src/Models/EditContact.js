@@ -1,45 +1,34 @@
 import React,{useState} from 'react'
-
-import {
-    FormLabel,FormControl,
-    Button,
-    Card,
-    Modal,
-    Form,
-    Container,
-    Row,
-    Col,
-    Table
-  } from "react-bootstrap";
-  import * as Yup from 'yup';
-import {Formik} from 'formik';
 import axios from 'axios';
+import EditUserInfo from './EditUserInfo'
+import EditUserAddressInfo from './EditUserAddressInfo'
+
+
 export default function EditContact({Edit,contactData,setEdit,setLoading}) {
     
-  const valScheema = Yup.object({
-    first:Yup.string().required("Required field"),
-    last:Yup.string().required("Required field"),
-    title:Yup.string().required("Required field"),
-    Cemail:Yup.string().email().required("Required field"),
-    CNumber:Yup.string().required("Required field"),
-    address1:Yup.string().required("Required field"),
-    address2:Yup.string(),
-    address3:Yup.string(),
-    Ccountry:Yup.string().required(),
-    county:Yup.string(),
-    town:Yup.string().required(),
-    postalcode:Yup.string().required()
-  })
+    const [userInfo,setuserInfo]=useState('');
+    const [open2,setopen2]=useState(false)
+
+  
 
     const editContact=async(payload)=>{
       setLoading(true)
       setEdit(false)
-      const body={id:contactData.contactId,title:payload.title,
-        first:payload.first,last:payload.last,Ccountry:payload.Ccountry,
-        Cemail:payload.Cemail
-        ,town:payload.town,postalcode:payload.postalcode
-        ,address1:payload.address1,address2:payload.address2,address3:payload.address3,CNumber:payload.CNumber,
-        county:payload.county}
+      let addressInfo=JSON.parse(localStorage.getItem("userAddressInfo"));
+    const body={id:contactData.contactId,
+    title:userInfo.title,
+    first:userInfo.first,
+    last:userInfo.last,
+    Ccountry:addressInfo.Ccountry,
+    Cemail:userInfo.Cemail,
+    companyName:userInfo.companyName
+    ,town:addressInfo.town,
+    postalcode:addressInfo.postalcode
+    ,address1:addressInfo.address1,
+    address2:addressInfo.address2,
+    address3:addressInfo.address3,
+    CNumber:userInfo.CNumber,
+    county:addressInfo.county}
         await axios
           .post("https://spiretechs.co.uk:3000/contactUpdate",body)
           .then(res => {console.log(res); setLoading(false)})
@@ -48,7 +37,9 @@ export default function EditContact({Edit,contactData,setEdit,setLoading}) {
 
     return (
       <div>
-      <Formik 
+        <EditUserInfo Edit={Edit} contactData={contactData} setuserInfo={setuserInfo} setEdit={setEdit}  setopen2={setopen2}/>
+        <EditUserAddressInfo open2={open2} setEdit={setEdit} contactData={contactData} setopen2={setopen2} editContact={editContact}/>
+      {/* <Formik 
           enableReinitialize
         validationSchema={valScheema}  
         validateOnChange={false}
@@ -178,7 +169,7 @@ export default function EditContact({Edit,contactData,setEdit,setLoading}) {
     </Modal.Footer>
   </Modal>
    )}
-  </Formik>
+  </Formik> */}
 
     </div>
     )
