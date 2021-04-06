@@ -27,6 +27,7 @@ const addnewcontact=async()=>{
     ,address1:addressInfo.address1,
     address2:addressInfo.address2,
     address3:addressInfo.address3,
+    contactType:userInfo.contactType,
     CNumber:userInfo.CNumber,
     county:addressInfo.county}
 
@@ -42,7 +43,9 @@ const addnewcontact=async()=>{
      Address3:addressInfo.address3,
      Town:addressInfo.town,
      County:addressInfo.county,
+     contactType:userInfo.contactType,
      postalCode:addressInfo.postalcode});
+     
      dispatch(setContacts(contacts))
     let p=await axios
       .post("https://spiretechs.co.uk:3000/contact",body)

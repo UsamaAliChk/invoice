@@ -20,6 +20,13 @@ export const setCompanies=(companies)=>{
     }
 }
 
+export const setBankDetail=(detail)=>{
+    return {
+        type:"setBankDetails",
+        Data:detail
+    }
+}
+
 export const showLoader=()=>{
     return{
         type:"showLoader"

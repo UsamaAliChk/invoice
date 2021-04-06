@@ -57,31 +57,25 @@ const Upload=async()=>{
         Ccountry:companyAddress.Ccountry,
         Cemail:companydata.Cemail,
         town:companyAddress.town,
-        postalcode:"123456",
+        postalcode:companyAddress.postalcode,
         address1:companyAddress.address1,
         address2:companyAddress.address2,
         address3:companyAddress.address3,
         CNumber:companydata.CNumber,
-        county:"",
+        county:companyAddress.county,
         logo:s,
         name:companydata.name,
         cpEmail:companydata.cpEmail,
         cpNumber:companydata.cpNumber,
-        // bankName:bankdata.bankName,
-        // accountNumber:bankdata.accountNumber,
-        // accountName:bankdata.accountName,
-        // bicCode:bankdata.bicCode,
-        // swiftCode:bankdata.swiftCode,
-        // sortCode:bankdata.sortCode,
-        // vat:bankdata.vat
+         vat:companydata.vat
       }
-        //console.log(body)
+     
         await axios
           .post("https://spiretechs.co.uk:3000/company",body)
           .then(res => {setcompnies(res.data);
                         setallCompanies(res.data);})
            .catch(err => console.error(err));
-           setloading(false);
+            setloading(false);
         setbankData([]);
         setcompanyData([]);
         setfile(''); 

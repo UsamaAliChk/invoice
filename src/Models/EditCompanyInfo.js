@@ -18,14 +18,13 @@ import {
 export default function EditCompnayInfo({open,setopen2,setopen,setcompanyData,companyData}) {
 
     const valScheema=Yup.object({
-        Cname:Yup.string().required(),
-        Cemail:Yup.string().required(),
-        CNumber:Yup.string().required(),
-        Ccountry:Yup.string().required(),
-        address1:Yup.string().required(),
-        address2:Yup.string().required(),
-        address3:Yup.string(),
-        town:Yup.string()
+      Cname:Yup.string().required("Company Name is Required"),
+      Cemail:Yup.string().required("Email Address is Required"),
+      CNumber:Yup.string().required("Company Number Address is Required"),
+      name:Yup.string().required("Owner Name is Required"),
+      cpNumber:Yup.string().required("Owner Contact Number is Required"),
+      cpEmail:Yup.string().required("Owner Email Address is Required"),
+      vat:Yup.number().required("This is required")
     })
 
     
@@ -34,13 +33,12 @@ export default function EditCompnayInfo({open,setopen2,setopen,setcompanyData,co
             Cname:payload.Cname,
             Cemail:payload.Cemail,
             CNumber:payload.CNumber,
-            Ccountry:payload.Ccountry,
-            address1:payload.address1,
-            address2:payload.address2,
-            address3:payload.address3,
-            town:payload.town
+            name:payload.name,
+            cpNumber:payload.cpNumber,
+            cpEmail:payload.cpEmail,
+            vat:payload.vat
         }
-        console.log(body)
+    
         setcompanyData(body);
         setopen(false);
         setopen2(true);
@@ -55,13 +53,12 @@ export default function EditCompnayInfo({open,setopen2,setopen,setcompanyData,co
             onSubmit={getData}
             initialValues={{
                 Cname:companyData.companyName,
-                Ccountry:companyData.Country,
+                name:companyData.chairPersonName,
+                cpEmail:companyData.chairPersonEmail,
+                cpNumber:companyData.chairPersonNumber,
                 Cemail:companyData.companyEmail,
-                address3:companyData.Address3,
-          address1:companyData.Address1,
-          address2:companyData.Address2,
-              town:companyData.Town,
-              CNumber:companyData.companyPhoneNumber,
+                CNumber:companyData.companyPhoneNumber,
+                vat:companyData.vat
             }}
           >
             {
@@ -76,62 +73,72 @@ export default function EditCompnayInfo({open,setopen2,setopen,setcompanyData,co
                 isSubmitting,
                 isValidating
               })=>(
-                <Modal show={open} size="xl">
-                    <Modal.Header>Compnay Info</Modal.Header>
-                        <Modal.Body>
+                <Modal show={open} size="lg" style={{marginTop:"-170px",height:"1000px"}}>
+                      <Modal.Body>
                             <Form onSubmit={handleSubmit}>
-                                <Row>
-                                    <Col md="4">
+                            <Row className='modal-top'>
+                                <h4 style={{marginTop:"20px"}}>Edit Company Info</h4>
+                            </Row>
+
+                            <Row style={{marginTop:"30px"}}>
+                                <Col md="5">
+                                    <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1504&q=80" className="modal-image"/>
+                                </Col>
+                                <Col md="7">
+                                <Row className="space-btw-inputs">
+                                    <Col md="6">
                                         <FormLabel>Name</FormLabel>
-                                        <FormControl id="Cname" isInvalid={!!errors.Cname} isValid={errors.Cname} type="text" onChange={handleChange} value={values.Cname}></FormControl>
+                                        <FormControl id="Cname" type="text" onChange={handleChange} isValid={errors.Cname} isInvalid={!!errors.Cname} value={values.Cname}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.Cname}</Form.Control.Feedback>
                                     </Col>
-                                    <Col md="5">
+                                    <Col md="6">
                                         <FormLabel>Email</FormLabel>
                                         <FormControl id="Cemail" autoComplete={false} type="text" isInvalid={!!errors.Cemail} isValid={errors.Cemail} value={values.Cemail} onChange={handleChange}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.Cemail}</Form.Control.Feedback>
                                     </Col>
-                                    <Col md="3">
-                                        <FormLabel>Company Number</FormLabel>
-                                        <FormControl type="text" id="CNumber" isInvalid={!!errors.CNumber} isValid={errors.CNumber} value={values.CNumber} onChange={handleChange}></FormControl>
+                                </Row>
+                                <Row className="space-btw-inputs">
+                                    <Col md="6">
+                                        <FormLabel>Phone Number</FormLabel>
+                                        <FormControl id="CNumber" type="text" onChange={handleChange} isValid={errors.CNumber} isInvalid={!!errors.CNumber} value={values.CNumber}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.CNumber}</Form.Control.Feedback>
+                                    </Col> 
+                                    <Col md="6">
+                                        <FormLabel>Vat</FormLabel>
+                                        <FormControl id="vat" autoComplete={false} type="text" isInvalid={!!errors.vat} isValid={errors.vat} value={values.vat} onChange={handleChange}></FormControl>
+                                        <Form.Control.Feedback type="invalid">{errors.vat}</Form.Control.Feedback>
                                     </Col>
                                 </Row>
-                                <Row>
-                                    <Col md="4">
-                                        <FormLabel>Address1</FormLabel>
-                                        <FormControl id="address1" autoComplete={false} type="text" isInvalid={!!errors.address1} isValid={errors.address1} value={values.address1} onChange={handleChange}></FormControl>
-                                        <Form.Control.Feedback type="invalid">{errors.address1}</Form.Control.Feedback>
+                                    <Row className="space-btw-inputs">
+                                    <Col md="6">
+                                        <FormLabel>Compnay Owner Name</FormLabel>
+                                        <FormControl id="name" autoComplete={false} type="text" isInvalid={!!errors.name} isValid={errors.name} value={values.name} onChange={handleChange}></FormControl>
+                                        <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
                                     </Col>
-                                    <Col md="4">
-                                        <FormLabel>Address 2</FormLabel>
-                                        <FormControl type="text" id="address2" isInvalid={!!errors.address2} isValid={errors.address2} value={values.address2} onChange={handleChange}></FormControl>
-                                        <Form.Control.Feedback type="invalid">{errors.address2}</Form.Control.Feedback>
-                                    </Col>
-                                    <Col md="4">
-                                        <FormLabel>Address 3</FormLabel>
-                                        <FormControl type="text" id="address3" value={values.address3} isInvalid={!!errors.address3} isValid={errors.address3} onChange={handleChange}></FormControl>
-                                        <Form.Control.Feedback type="invalid">{errors.address3}</Form.Control.Feedback>
-                                    </Col>
+                                            
+                                            <Col md="6">
+                                                <FormLabel>Company Owner Number</FormLabel>
+                                                <FormControl id="cpNumber" autoComplete={false} type="text" isInvalid={!!errors.cpNumber} isValid={errors.name} value={values.cpNumber} onChange={handleChange}></FormControl>
+                                                <Form.Control.Feedback type="invalid">{errors.cpNumber}</Form.Control.Feedback>
+                                            </Col>         
+                                        </Row>
+                                        <Row className="space-btw-inputs">
+                                        <Col md="12">
+                                                <FormLabel>Compnay Owner Email</FormLabel>
+                                                <FormControl id="cpEmail" autoComplete={false} type="text" isInvalid={!!errors.cpEmail} isValid={errors.cpEmail} value={values.cpEmail} onChange={handleChange}></FormControl>
+                                                <Form.Control.Feedback type="invalid">{errors.cpEmail}</Form.Control.Feedback>
+                                            </Col>
+                                        </Row>
+                               
+                                <Row  className="modal-buttons-container">
+                                    <Button type="submit" className="modal-button" style={{marginLeft:"85px",width:"80px"}}  > Next </Button>
+                                    <Button style={{marginRight:"160px"}} className="modal-button" onClick={e=>setopen(false)} > Cancel </Button>
                                 </Row>
-                                <Row>
-                                    <Col md="4">
-                                        <FormLabel>Country</FormLabel>
-                                        <FormControl type="text" id="Ccountry" isValid={errors.Ccountry} isInvalid={!!errors.Ccountry} value={values.Ccountry} onChange={handleChange}></FormControl>
-                                        <Form.Control.Feedback type="invalid">{errors.Ccountry}</Form.Control.Feedback>
-                                    </Col>
-                                    <Col md="4">
-                                        <FormLabel>Town</FormLabel>
-                                        <FormControl type="text" id="town" isValid={errors.town} isInvalid={!!errors.town} value={values.town} onChange={handleChange}></FormControl>
-                                        <Form.Control.Feedback type="invalid">{errors.town}</Form.Control.Feedback>
-                                    </Col>
-                                </Row>
-                                <Row style={{marginTop:"20px"}}>
-                                    <Button type="submit" style={{marginLeft:"15px"}}  > Next </Button>
-                                    <Button style={{marginLeft:"50px"}} onClick={e=>setopen(false)} > Cancel </Button>
-                                </Row>
+
+                               </Col>
+                            </Row>
                             </Form>
-                    </Modal.Body>
+                        </Modal.Body>
                 </Modal>
               )}
               </Formik>

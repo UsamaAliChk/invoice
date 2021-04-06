@@ -12,36 +12,31 @@ export default function CompanyEditModel({Edit,setEdit,companyData,setloading,se
     
 
 
-    const editCompany=async(payload)=>{
+    const editCompany=async()=>{
       setEdit(false)
         setloading(true)
-        console.log(companydata);
-        let bankdata=JSON.parse(localStorage.getItem("bankdata"))
+       
+        let companyAddress=JSON.parse(localStorage.getItem("companyAddress"))
         const body={
           id:companyData.companyId,
           Cname:companydata.Cname,
-        Ccountry:companydata.Ccountry,
+        Ccountry:companyAddress.Ccountry,
         Cemail:companydata.Cemail,
-        town:companydata.town,
-        postalcode:"",
-        address1:companydata.address1,
-        address2:companydata.address2,
-        address3:companydata.address3,
+        town:companyAddress.town,
+        postalcode:companyAddress.postalcode,
+        address1:companyAddress.address1,
+        address2:companyAddress.address2,
+        address3:companyAddress.address3,
         CNumber:companydata.CNumber,
         county:"",
-        name:bankdata.name,
-        cpEmail:bankdata.cpEmail,
-        cpNumber:bankdata.cpNumber,
-        bankName:bankdata.bankName,
-        accountNumber:bankdata.accountNumber,
-        accountName:bankdata.accountName,
-        bicCode:bankdata.bicCode,
-        swiftCode:bankdata.swiftCode,
-        sortCode:bankdata.sortCode,
-        vat:bankdata.vat
+        name:companydata.name,
+        cpEmail:companydata.cpEmail,
+        cpNumber:companydata.cpNumber,
+        vat:companydata.vat
         }
+        
         //const body={id:id1,Cname,Ccountry,Cemail,town,postalcode,address1,address2,address3,CNumber,county}
-        console.log(body)
+       
          const s5=await axios
           .post("https://spiretechs.co.uk:3000/companyUpdate",body)
           .then(res => {return res})

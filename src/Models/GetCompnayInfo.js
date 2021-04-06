@@ -19,12 +19,13 @@ import {
 export default function GetCompnayInfo({open,setopen2,setopen,setcompanyData}) {
 
     const valScheema=Yup.object({
-        Cname:Yup.string().required(),
-        Cemail:Yup.string().required(),
-        CNumber:Yup.string().required(),
-        name:Yup.string().required(),
-        cpNumber:Yup.string().required(),
-        cpEmail:Yup.string().required(),
+        Cname:Yup.string().required("Company Name is Required"),
+        Cemail:Yup.string().required("Email Address is Required"),
+        CNumber:Yup.string().required("Company Number Address is Required"),
+        name:Yup.string().required("Owner Name is Required"),
+        cpNumber:Yup.string().required("Owner Contact Number is Required"),
+        cpEmail:Yup.string().required("Owner Email Address is Required"),
+        vat:Yup.string().required("This is required field")
     })
 
     
@@ -36,8 +37,9 @@ export default function GetCompnayInfo({open,setopen2,setopen,setcompanyData}) {
             name:payload.name,
             cpNumber:payload.cpNumber,
             cpEmail:payload.cpEmail,
+            vat:payload.vat
         }
-        console.log(body)
+      
         setcompanyData(body);
         setopen(false);
         setopen2(true);
@@ -57,7 +59,7 @@ export default function GetCompnayInfo({open,setopen2,setopen,setcompanyData}) {
               name:'',
               cpEmail:'',
               cpNumber:'',
-              
+              vat:0
             }}
           >
             {
@@ -72,23 +74,23 @@ export default function GetCompnayInfo({open,setopen2,setopen,setcompanyData}) {
                 isSubmitting,
                 isValidating
               })=>(
-                <Modal show={open} size="xl" style={{marginTop:"-600px",height:"1200px"}} centered={true}>
+                <Modal show={open} size="lg" style={{marginTop:"-150px",height:"800px"}}>
                    
                         <Modal.Body>
                             <Form onSubmit={handleSubmit}>
                             <Row className='modal-top'>
-                                <h3>Company Info</h3>
+                                <h4 style={{marginTop:"20px"}}>Company Info</h4>
                             </Row>
 
-                            <Row>
-                                <Col md="6">
+                            <Row style={{marginTop:"30px"}}>
+                                <Col md="5">
                                     <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1504&q=80" className="modal-image"/>
                                 </Col>
-                                <Col md="6">
+                                <Col md="7">
                                 <Row className="space-btw-inputs">
                                     <Col md="6">
                                         <FormLabel>Name</FormLabel>
-                                        <FormControl id="Cname" type="text" onChange={handleChange} isValid={errors.Cname} isInvalid={!!errors.Cname} value={values.Cemail}></FormControl>
+                                        <FormControl id="Cname" type="text" onChange={handleChange} isValid={errors.Cname} isInvalid={!!errors.Cname} value={values.Cname}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.Cname}</Form.Control.Feedback>
                                     </Col>
                                     <Col md="6">
@@ -104,27 +106,35 @@ export default function GetCompnayInfo({open,setopen2,setopen,setcompanyData}) {
                                         <Form.Control.Feedback type="invalid">{errors.CNumber}</Form.Control.Feedback>
                                     </Col> 
                                     <Col md="6">
+                                        <FormLabel>Vat</FormLabel>
+                                        <FormControl id="vat" autoComplete={false} type="text" isInvalid={!!errors.vat} isValid={errors.vat} value={values.vat} onChange={handleChange}></FormControl>
+                                        <Form.Control.Feedback type="invalid">{errors.vat}</Form.Control.Feedback>
+                                    </Col>
+                                </Row>
+                                    <Row className="space-btw-inputs">
+                                    <Col md="6">
                                         <FormLabel>Compnay Owner Name</FormLabel>
                                         <FormControl id="name" autoComplete={false} type="text" isInvalid={!!errors.name} isValid={errors.name} value={values.name} onChange={handleChange}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
                                     </Col>
-                                </Row>
-                                    <Row className="space-btw-inputs">
-                                            <Col md="6">
-                                                <FormLabel>Compnay Owner Email</FormLabel>
-                                                <FormControl id="cpEmail" autoComplete={false} type="text" isInvalid={!!errors.cpEmail} isValid={errors.cpEmail} value={values.cpEmail} onChange={handleChange}></FormControl>
-                                                <Form.Control.Feedback type="invalid">{errors.cpEmail}</Form.Control.Feedback>
-                                            </Col>
+                                            
                                             <Col md="6">
                                                 <FormLabel>Company Owner Number</FormLabel>
                                                 <FormControl id="cpNumber" autoComplete={false} type="text" isInvalid={!!errors.cpNumber} isValid={errors.name} value={values.cpNumber} onChange={handleChange}></FormControl>
                                                 <Form.Control.Feedback type="invalid">{errors.cpNumber}</Form.Control.Feedback>
                                             </Col>         
                                         </Row>
+                                        <Row className="space-btw-inputs">
+                                        <Col md="12">
+                                                <FormLabel>Compnay Owner Email</FormLabel>
+                                                <FormControl id="cpEmail" autoComplete={false} type="text" isInvalid={!!errors.cpEmail} isValid={errors.cpEmail} value={values.cpEmail} onChange={handleChange}></FormControl>
+                                                <Form.Control.Feedback type="invalid">{errors.cpEmail}</Form.Control.Feedback>
+                                            </Col>
+                                        </Row>
                                
-                                <Row style={{marginTop:"30px"}}>
-                                    <Button type="submit" style={{marginLeft:"15px"}}  > Next </Button>
-                                    <Button style={{marginLeft:"50px"}} onClick={e=>setopen(false)} > Cancel </Button>
+                                <Row  className="modal-buttons-container">
+                                    <Button type="submit" className="modal-button" style={{marginLeft:"85px",width:"80px"}}  > Next </Button>
+                                    <Button style={{marginRight:"160px"}} className="modal-button" onClick={e=>setopen(false)} > Cancel </Button>
                                 </Row>
 
                                </Col>

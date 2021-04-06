@@ -21,13 +21,12 @@ import Loader from '../loader/Loading'
 import CompanyAddModel from '../Models/CompanyAddModel'
 import CompanyEditModel from '../Models/CompanyEditModel'
 function TableList() {
+
 const [IsOpen,setIsOpen]=useState(false)
 const [companyData,setcompanyData]=useState('');
 const [Edit,setEdit]=useState(false);
 const [id1,setid1]=useState();
-const [first,setfirst]=useState(false)
-const [second,setseconf]=useState(false)
-const [third,setthird]=useState(false)
+
 const editCompnay=(id)=>{
     let s={}
     for(let i=0;i<companies.length;i++){
@@ -36,7 +35,7 @@ const editCompnay=(id)=>{
         }
     }
     setcompanyData(s);
-    console.log(companyData)
+   
     setid1(id);
     setEdit(true);
 }
@@ -45,7 +44,7 @@ const editCompnay=(id)=>{
 const dispatch=useDispatch()
 
 const handelClick=async(id)=>{
-    console.log(id);
+    
      const company= await axios
         .get(`https://spiretechs.co.uk:3000/company/${id}`)
         .then(res => {return res.data})
@@ -74,7 +73,7 @@ const searchByName=(value)=>{
   const searchByCountry=(value)=>{
     value=value.toUpperCase();
       let data=allCompnies;
-      console.log(data)
+   
       let data2=[];
       for(let i=0;i<data.length;i++){
         if(data[i].Country.toUpperCase().indexOf(value)>-1){
@@ -82,7 +81,6 @@ const searchByName=(value)=>{
         }
       }
         setcompnies(data2)
- 
   }
 
   const getCompanies=async()=>{
@@ -99,7 +97,7 @@ const searchByName=(value)=>{
       setcompnies(data)
       setallCompanies(data);
       setloading(false);
-      console.log(data)
+     
   }
   useEffect(()=>{
     getCompanies();

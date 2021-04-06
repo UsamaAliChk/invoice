@@ -24,8 +24,9 @@ export default function GetBankInfo({setbankData,setopen2,open2,addNewCompany,se
         address1:Yup.string().required(),
         address2:Yup.string().required(),
         address3:Yup.string(),
-        town:Yup.string()
-
+        town:Yup.string(),
+        county:Yup.string(),
+        postalcode:Yup.string()
         // bankName:Yup.string(),
         // accountNumber:Yup.string(),
         // sortCode:Yup.string(),
@@ -43,14 +44,10 @@ export default function GetBankInfo({setbankData,setopen2,open2,addNewCompany,se
             address1:payload.address1,
             address2:payload.address2,
             address3:payload.address3,
-            town:payload.town
-            // bankName:payload.bankName,
-            // accountNumber:payload.accountNumber,
-            // accountName:payload.accountName,
-            // bicCode:payload.bicCode,
-            // swiftCode:payload.swiftCode,
-            // sortCode:payload.sortCode,
-            // vat:payload.vat
+            town:payload.town,
+            county:payload.county,
+            postalcode:payload.postalcode
+          
         }
         console.log(body)
         setbankData(body);
@@ -72,7 +69,9 @@ export default function GetBankInfo({setbankData,setopen2,open2,addNewCompany,se
                 address1:'',
                 address2:'',
                 address3:'',
-                town:''
+                town:'',
+                county:'',
+                postalcode:""
             }}
           >
             {
@@ -87,15 +86,15 @@ export default function GetBankInfo({setbankData,setopen2,open2,addNewCompany,se
                 isSubmitting,
                 isValidating
               })=>(
-                <Modal show={open2} size="xl" style={{marginTop:"-600px",height:"1200px"}} centered={true}>
+                <Modal show={open2} size="lg" style={{marginTop:"-220px",height:"1000px"}}>
                     
                         <Modal.Body>
                             <Form onSubmit={handleSubmit}>
                             <Row className='modal-top'>
-                                <h3>Company Address</h3>
+                                <h4 style={{marginTop:'20px'}}>Company Address</h4>
                             </Row>
-                                <Row>
-                                   <Col md="6">
+                                <Row style={{marginTop:"30px",marginLeft:"1px"}}>
+                                   <Col md="7">
                                         <Row>
                                             <Col md="12">
                                                 <FormLabel>Address1</FormLabel>
@@ -128,28 +127,33 @@ export default function GetBankInfo({setbankData,setopen2,open2,addNewCompany,se
                                                 <Form.Control.Feedback type="invalid">{errors.town}</Form.Control.Feedback>
                                             </Col>
                                         </Row>
+                                        <Row>
+                                            <Col md="6">
+                                                <FormLabel>County</FormLabel>
+                                                <FormControl id="county"  type="text" isInvalid={!!errors.county} isValid={errors.county} value={values.county} onChange={handleChange}></FormControl>
+                                                <Form.Control.Feedback type="invalid">{errors.county}</Form.Control.Feedback>
+                                            </Col>
+                                            <Col md="6">
+                                                <FormLabel>Postal Code</FormLabel>
+                                                <FormControl id="postalcode"  type="text" isInvalid={!!errors.postalcode} isValid={errors.postalcode} value={values.postalcode} onChange={handleChange}></FormControl>
+                                                <Form.Control.Feedback type="invalid">{errors.postalcode}</Form.Control.Feedback>
+                                            </Col>
+                                        </Row>
                                         <Row style={{marginTop:"5px",marginLeft:"2px"}}>
                                             <FormLabel>Logo</FormLabel>
                                             <FormControl type="file" onChange={(e)=>setfile(e.target.files[0])}></FormControl>
                                         </Row>
-                                <Row style={{marginTop:"30px"}}>
-                                    <Button onClick={e=>{setopen2(false);setopen(true)}} style={{marginLeft:"20px"}}>Previous</Button>
-                                    <Button type="submit" style={{marginLeft:"50px"}}>SAVE</Button>
-                                    <Button style={{marginLeft:"50px"}} onClick={e=>{setopen2(false)}}>CANCEL</Button>
+                                <Row className="modal-buttons-container">
+                                    <Button className="modal-button" onClick={e=>{setopen2(false);setopen(true)}} style={{marginLeft:"20px"}}>Previous</Button>
+                                    <Button className="modal-button" type="submit">SAVE</Button>
+                                    <Button className="modal-button" style={{marginRight:"15px"}} onClick={e=>{setopen2(false)}}>CANCEL</Button>
                                 </Row>   
                                     </Col>
                                    
-                                    <Col md="6">
-                                    <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1504&q=80" className="modal-image"/>
+                                    <Col md="5">
+                                    <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1504&q=80" className="modal-image-compnay-address"/>
                                 </Col>
-                                    
                                 </Row>
-
-
-                            
-                            
-            
-       
                             </Form>
                     </Modal.Body>
                 </Modal>

@@ -14,6 +14,7 @@ import ShowList from './ShowList'
 function Maps() {
   const [Caddress,setCaddress]=useState([]);
   const contacts=useSelector(state=>state.getContacts)
+  console.log(contacts)
   const selectedCompany=useSelector(state=>state.getCompany)
   const dispatch=useDispatch();
   const [loading ,setloading]=useState(true);
@@ -151,9 +152,10 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                       {
                         contacts.map(e=>{
                           let name=e.title+' '+e.firstName+' '+e.lastName;
+                          if(e.contactType==="billing"){
                           return(
                             <option value={e.contactId}>{name}</option>
-                          )
+                          )}
                         })
                       }
                   </Form.Control>

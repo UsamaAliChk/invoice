@@ -23,6 +23,7 @@ export default function EditContact({Edit,contactData,setEdit,setLoading}) {
     Cemail:userInfo.Cemail,
     companyName:userInfo.companyName
     ,town:addressInfo.town,
+    contactType:userInfo.contactType,
     postalcode:addressInfo.postalcode
     ,address1:addressInfo.address1,
     address2:addressInfo.address2,

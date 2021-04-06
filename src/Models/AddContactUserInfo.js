@@ -21,7 +21,8 @@ export default function AddContactUserInfo({IsOpen,setIsOpen,setopen2,setuserInf
         title:Yup.string().required("Required field"),
         Cemail:Yup.string().email().required("Required field"),
         CNumber:Yup.string().required("Required field"),
-        companyName:Yup.string().required()
+        companyName:Yup.string().required(),
+        contactType:Yup.string().required()
     });
 
     const getData=(payload)=>{
@@ -31,9 +32,10 @@ export default function AddContactUserInfo({IsOpen,setIsOpen,setopen2,setuserInf
             last:payload.last,
             Cemail:payload.Cemail,
             companyName:payload.companyName,
-            CNumber:payload.CNumber
+            CNumber:payload.CNumber,
+            contactType:payload.contactType
         }
-        console.log(body)
+      
         setuserInfo(body);
         setIsOpen(false);
         setopen2(true);
@@ -53,6 +55,7 @@ export default function AddContactUserInfo({IsOpen,setIsOpen,setopen2,setuserInf
               CNumber:'',
               Cemail:'',
               companyName:'',
+              contactType:''
             }}
           >
             {
@@ -67,51 +70,77 @@ export default function AddContactUserInfo({IsOpen,setIsOpen,setopen2,setuserInf
                 isSubmitting,
                 isValidating
               })=>(
-                <Modal show={IsOpen} size='xl'>
-                        <Modal.Header>Add Contact</Modal.Header>
+                <Modal show={IsOpen} size='lg'  style={{marginTop:"-170px",height:"1000px"}}>
                         <Modal.Body>
-                            <Form onSubmit={handleSubmit} autoComplete='off'>
+                            <Row className='modal-top'>
+                                <h4 style={{marginTop:'20px'}}>Contact Information</h4>
+                            </Row>
+                            <Row style={{marginTop:"30px"}}>
+                                <Col md="5">
+                                <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1504&q=80" className="modal-image-compnay-address"/>
+                                </Col>
+                                <Col md="7">
+                                <Form onSubmit={handleSubmit} autoComplete='off'>
                                 <Row>
-                                    <Col md="4">
+                                    <Col md="6">
                                         <FormLabel>Title</FormLabel>
                                         <FormControl id="title" type="text" value={values.title} isInvalid={!!errors.title}  onChange={handleChange} isValid={errors.title}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.title}</Form.Control.Feedback>
                                     </Col>
-                                    <Col md="4">
+                                    <Col md="6">
                                         <FormLabel>First Name</FormLabel>
                                         <FormControl id="first" type="text" value={values.first} onChange={handleChange} isValid={errors.first} isInvalid={!!errors.first}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.first}</Form.Control.Feedback>
                                     </Col>
-            
-                                    <Col md="4">
+                                </Row>
+                                <Row>
+                                    <Col md="6">
                                         <FormLabel>Last Name</FormLabel>
                                         <FormControl id="last" isInvalid={!!errors.last} isValid={errors.last} type="text" value={values.last} onChange={handleChange}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.last}</Form.Control.Feedback>
                                     </Col>
-
-                                </Row>
-                                <Row>
-                                    <Col md="4">
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl id="Cemail" type="text" isInvalid={!!errors.Cemail} isValid={errors.Cemail} value={values.Cemail} onChange={handleChange}></FormControl>
-                                        <Form.Control.Feedback type="invalid">{errors.Cemail}</Form.Control.Feedback>
-                                    </Col>
-                                    <Col md="4">
-                                        <FormLabel>Phone Number</FormLabel>
-                                        <FormControl type="text" id="CNumber" isInvalid={!!errors.CNumber} isValid={errors.CNumber} value={values.CNumber} onChange={handleChange}></FormControl>
-                                        <Form.Control.Feedback type="invalid">{errors.CNumber}</Form.Control.Feedback>
-                                    </Col>
-                                    <Col md="4">
+                                    <Col md="6">
                                         <FormLabel>Company Name</FormLabel>
                                         <FormControl id="companyName" type="text" value={values.companyName} onChange={handleChange} isValid={errors.companyName} isInvalid={!!errors.companyName}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.companyName}</Form.Control.Feedback>
                                     </Col>
                                 </Row>
-                                <Row style={{marginTop:"30px"}}>
-                                    <Button type="submit" style={{marginLeft:'12px',marginRight:'40px'}}>Next</Button>
-                                    <Button onClick={e=>setIsOpen(false)}>Cancel</Button>
+                                <Row>
+                                <Col md="12">
+                                        <FormLabel>Contact Type</FormLabel>
+                                        <FormControl id="contactType" as="select" onChange={handleChange} isValid={errors.contactType} isInvalid={!!errors.contactType}>
+                                        <option>billing</option>
+                                        <option>personal</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        </FormControl>
+                    
+                                        <Form.Control.Feedback type="invalid">{errors.contactType}</Form.Control.Feedback>
+                                    </Col>  
+                                </Row>
+                                <Row>
+                                    <Col md="12">
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl id="Cemail" type="text" isInvalid={!!errors.Cemail} isValid={errors.Cemail} value={values.Cemail} onChange={handleChange}></FormControl>
+                                        <Form.Control.Feedback type="invalid">{errors.Cemail}</Form.Control.Feedback>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md="12">
+                                        <FormLabel>Phone Number</FormLabel>
+                                        <FormControl type="text" id="CNumber" isInvalid={!!errors.CNumber} isValid={errors.CNumber} value={values.CNumber} onChange={handleChange}></FormControl>
+                                        <Form.Control.Feedback type="invalid">{errors.CNumber}</Form.Control.Feedback>
+                                    </Col>
+                                </Row>
+                                <Row className="modal-buttons-container">
+                                    <Button type="submit" className="modal-button" style={{marginLeft:"85px",width:"80px"}}>Next</Button>
+                                    <Button className="modal-button" style={{marginRight:"160px"}}  onClick={e=>setIsOpen(false)}>Cancel</Button>
                                 </Row>
                             </Form>
+                                </Col>
+                            </Row>
+                            
                         </Modal.Body>
                 </Modal>
               )}

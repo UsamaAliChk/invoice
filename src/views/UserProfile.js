@@ -14,14 +14,14 @@ import {
 } from "react-bootstrap";
 
 
-
+import AddAcountDetail from '../Models/AddAcountDetail'
 import {useSelector} from 'react-redux'
 import AddContact from '../Models/AddContact'
 import EditContact from '../Models/EditContact'
 import Loader from '../loader/Loading'
 function User() {
 
-
+  const [open,setopen]=useState(false)
   const [Loading,setLoading]=useState(true)
   const [IsOpen,setIsOpen]=useState(false)
   const [Edit,setEdit]=useState(false)
@@ -47,6 +47,7 @@ function User() {
   return (
   
     <>
+      <AddAcountDetail open={open} setopen={setopen} data={data} setLoading={setLoading}/>
       <EditContact Edit={Edit} setEdit={setEdit} id1={id1} contactData={contactData} setLoading={setLoading}/>
       <AddContact IsOpen={IsOpen} data={data} setLoading={setLoading} contacts={contacts} setIsOpen={setIsOpen}/> 
       {
@@ -106,7 +107,7 @@ function User() {
                         <label>Address</label>
                         <Form.Control
                           defaultValue={data[0].Address1}
-                          placeholder="Home Address"
+                          placeholder="Address"
                           type="text"
                         ></Form.Control>
                       </Form.Group>
@@ -137,7 +138,7 @@ function User() {
                       </Form.Group>
                     </Col>
                     <Col md="4">
-                      <Button>Add Account Details</Button>                    
+                      <Button style={{color:"black"}} disabled={(data[0].hasBankDetails===1)?true:false} onClick={e=>setopen(true)}>Add Account Details</Button>                    
                     </Col>
                   </Row>
                 
