@@ -109,11 +109,12 @@ export default function AddContactUserInfo({IsOpen,setIsOpen,setopen2,setuserInf
                                 <Col md="12">
                                         <FormLabel>Contact Type</FormLabel>
                                         <FormControl id="contactType" as="select" onChange={handleChange} isValid={errors.contactType} isInvalid={!!errors.contactType}>
+                                        <option>Select contact type</option>
                                         <option>billing</option>
                                         <option>personal</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                        <option>Administrative</option>
+                                        <option>General</option>
+                                        <option>supplier</option>
                                         </FormControl>
                     
                                         <Form.Control.Feedback type="invalid">{errors.contactType}</Form.Control.Feedback>
