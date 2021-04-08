@@ -57,7 +57,7 @@ export default function AddAcountDetail({open,setopen,data,setLoading}) {
           setLoading(false);
           
     }
-
+    console.log(data)
     return (
         <div>
             <Formik 
@@ -65,14 +65,24 @@ export default function AddAcountDetail({open,setopen,data,setLoading}) {
             validationSchema={schema}  
             validateOnChange={false}
             onSubmit={addAccount}
-            initialValues={{
+            initialValues={
+                (open===true)?{
+                    bankName:data[0].bankName,
+                    accountName:data[0].accountName,
+                    accountNumber:data[0].accountNumber,
+                    bicCode:data[0].bicCode,
+                    sortCode:data[0].sortCode,
+                    swiftCode:data[0].swiftCode
+            }:{
+                
                 bankName:'',
                 accountName:'',
                 accountNumber:'',
                 bicCode:'',
                 sortCode:'',
                 bicCode:''
-            }}
+            }
+        }
           >
             {
               ({
@@ -93,7 +103,7 @@ export default function AddAcountDetail({open,setopen,data,setLoading}) {
                         </Row>
                         <Row style={{marginTop:'20px'}}>
                           <Col md="6">
-                            <img className="account-modal-image" src={'https://images.unsplash.com/photo-1497215641119-bbe6d71ebaae?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80'}/>
+                            <img className="account-modal-image" src={'https://thumbs.dreamstime.com/b/person-writing-sheet-paper-fixed-to-clipboard-clipboard-165795947.jpg'}/>
                           </Col>
                           <Col md="6">
                           <Form onSubmit={handleSubmit}>

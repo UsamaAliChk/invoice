@@ -36,14 +36,7 @@ const dashboardRoutes = [
     show:true,
     layout: "/admin",
   },
-  {
-    path: "/invoices",
-    name: "INVOICES",
-    show:true,
-    icon: "fas fa-file-invoice-dollar",
-    component: Icons,
-    layout: "/admin",
-  },
+ 
   {
     path: "/user",
     name: "Company Detail",
@@ -81,7 +74,14 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   
-  
+  {
+    path: "/invoices",
+    name: "INVOICES",
+    show:true,
+    icon: "fas fa-file-invoice-dollar",
+    component: Icons,
+    layout: "/admin",
+  },
   {
     path:"/companyDetail",
     component:CompanyDetail

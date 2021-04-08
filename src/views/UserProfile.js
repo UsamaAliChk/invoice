@@ -63,82 +63,127 @@ function User() {
               </Card.Header>
               <Card.Body>
                 <Form>
-                  <Row>
-                    <Col className="pr-1" md="5">
+                 
+                    <Row>
+                    <Col className="pr-1" md="3">
                       <Form.Group>
                         <label>Company</label>
-                        <Form.Control
+                        <p>{data[0].companyName}</p>
+                        {/* <Form.Control
                           defaultValue={data[0].companyName}
                           disabled
                           placeholder="SAMWAYS"
                           type="text"
-                        ></Form.Control>
+                        ></Form.Control> */}
                       </Form.Group>
                     </Col>
                     <Col className="px-1" md="3">
                       <Form.Group>
                         <label>Contact Number</label>
-                        <Form.Control
+                        <p>{data[0].companyPhoneNumber}</p>
+                        {/* <Form.Control
                           defaultValue={data[0].companyPhoneNumber}
                           placeholder="Number"
                           type="text"
                           disabled
-                        ></Form.Control>
+                        ></Form.Control> */}
                       </Form.Group>
                     </Col>
                     <Col className="pl-1" md="4">
                       <Form.Group>
-                        <label htmlFor="exampleInputEmail1">
+                        {
+                          (data[0].companyEmail!=='')?
+                          <div>
+                            <label htmlFor="exampleInputEmail1">
                           Email address
                         </label>
-                        <Form.Control
+                        <p>{data[0].companyEmail}</p>
+                          </div>
+                          :null
+                        }
+                        
+                        {/* <Form.Control
                         defaultValue={data[0].companyEmail}
                           placeholder="Email"
                           type="email"
                           disabled
-                        ></Form.Control>
+                        ></Form.Control> */}
                       </Form.Group>
                     </Col>
                   </Row>
                   
                   <Row>
-                    <Col md="12">
+                    <Col md="6">
                       <Form.Group>
-                        <label>Address</label>
-                        <Form.Control
+                        <label>Address 1</label>
+                        <p>{data[0].Address1}</p>
+                        {/* <Form.Control
                           defaultValue={data[0].Address1}
                           placeholder="Address"
                           type="text"
-                        ></Form.Control>
+                        ></Form.Control> */}
                       </Form.Group>
                     </Col>
-                  </Row>
-                  <Row >
-                    
-                    <Col className="px-1" md="4" style={{marginLeft:'12px'}}>
+                    {
+                      (data[0].address2!=="")?
+                      <Col md="6">
                       <Form.Group>
-                        <label>Country</label>
-                        <Form.Control
-                          defaultValue={data[0].Country}
-                          placeholder="Country"
+                        <label>Address 2</label>
+                        <p>{data[0].Address2}</p>
+                        {/* <Form.Control
+                          defaultValue={data[0].Address1}
+                          placeholder="Address"
                           type="text"
-                          disabled
-                        ></Form.Control>
+                        ></Form.Control> */}
                       </Form.Group>
-                    </Col>
-                    <Col className="pl-1" md="4">
+                      </Col>:null
+                    }
+                  </Row>
+                  <Row>
+                  {
+                      (data[0].Address3!=="")?<Col className="pl-1" md="3" style={{marginLeft:'15px'}}>
                       <Form.Group>
-                        <label>Postal Code</label>
-                        <Form.Control
+                        <label>Address 3</label>
+                        <p>{data[0].Address3}</p>
+                        {/* <Form.Control
                           defaultValue={data[0].postalCode}
                           disabled
                           placeholder="ZIP Code"
                           type="text"
-                        ></Form.Control>
+                        ></Form.Control> */}
+                      </Form.Group>
+                    </Col>:null
+                    }
+                    <Col className="px-1" md="4" style={{marginLeft:'15px'}}>
+                      <Form.Group>
+                        <label>Country</label>
+                        <p>{data[0].Country}</p>
+                        {/* <Form.Control
+                          defaultValue={data[0].Country}
+                          placeholder="Country"
+                          type="text"
+                          disabled
+                        ></Form.Control> */}
                       </Form.Group>
                     </Col>
+                    {
+                      (data[0].postalCode!=="")?<Col className="pl-1" md="3">
+                      <Form.Group>
+                        <label>Postal Code</label>
+                        <p>{data[0].postalCode}</p>
+                        {/* <Form.Control
+                          defaultValue={data[0].postalCode}
+                          disabled
+                          placeholder="ZIP Code"
+                          type="text"
+                        ></Form.Control> */}
+                      </Form.Group>
+                    </Col>:null
+                    }
+                    </Row>
+                  <Row >
                     <Col md="4">
-                      <Button style={{color:"black"}} disabled={(data[0].hasBankDetails===1)?true:false} onClick={e=>setopen(true)}>Add Account Details</Button>                    
+                      <Button style={{color:"black"}} onClick={e=>setopen(true)}>Update Company</Button>                    
                     </Col>
                   </Row>
                 
@@ -172,12 +217,15 @@ function User() {
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
                     <img
                       alt="..."
+                      style={{objectFit:'contain'}}
                       className="avatar border-gray"
                       src={data[0].logoUrl}
-                    ></img>
-                    <h5 className="title" style={{textTransform:'uppercase'}}>{data[0].companyName}</h5>
+                    />
+                    
                   </a>
+                  <h5  style={{textTransform:'uppercase',fontWeight:'bold'}}>{data[0].companyName}</h5>
                   <p className="description">{data[0].chairPersonName}</p>
+                  <p className="description">{data[0].companyPhoneNumber}</p>
                 </div>
                 <p className="description text-center">
                   {data[0].chairPersonEmail}

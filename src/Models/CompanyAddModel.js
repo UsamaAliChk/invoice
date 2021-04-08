@@ -13,7 +13,7 @@ export default function CompanyAddModel({open,setopen,setallCompanies,setcompnie
     
     const [logo,setlogo]=useState(null);
     const [open2,setopen2]=useState(false);
-    const[file,setfile]=useState()
+    const[file,setfile]=useState(null)
 
     const [companydata,setcompanyData]=useState([])
     const [bankdata1,setbankData]=useState([])
@@ -50,8 +50,9 @@ const Upload=async()=>{
         let companyAddress=JSON.parse(localStorage.getItem("companyAddress"))
         setopen(false);
         setloading(true);
-       
-        var s=await Upload(); 
+       if(file!==null)
+        var s=await Upload();
+      else s=null 
       const body={
         Cname:companydata.Cname,
         Ccountry:companyAddress.Ccountry,
