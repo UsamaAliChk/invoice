@@ -214,6 +214,7 @@ function User() {
               </div>
               <Card.Body>
                 <div className="author">
+                  
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
                     <img
                       alt="..."
@@ -221,8 +222,9 @@ function User() {
                       className="avatar border-gray"
                       src={data[0].logoUrl}
                     />
-                    
+                   
                   </a>
+                  
                   <h5  style={{textTransform:'uppercase',fontWeight:'bold'}}>{data[0].companyName}</h5>
                   <p className="description">{data[0].chairPersonName}</p>
                   <p className="description">{data[0].companyPhoneNumber}</p>
