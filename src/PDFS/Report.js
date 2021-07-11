@@ -31,7 +31,7 @@ export default function Documnet1({Data}) {
        <Document>
          <Page wrap>
              <View style={{marginLeft:"60px",marginRight:'60px'}}>
-            <View style={{display:"flex",flexDirection:"row"}}>
+            <View style={{display:"flex",flexDirection:"row",justifyContent:'space-between',width:'100%'}}>
                <Text style={style.text}>{Data.company.name}</Text>
                <Text style={style.invoice}>INVIOCE</Text>
             </View>
@@ -256,7 +256,7 @@ var style=StyleSheet.create({
     },
     
     invoice:{
-        marginLeft:"270px",
+        
         marginTop:"20px",
         color:"#3973ac",
         fontSize:30,
