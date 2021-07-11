@@ -5,8 +5,7 @@ import GetCompnayInfo from './GetCompnayInfo';
 import GetBankInfo from './GetBankInfo';
 
 import axios from 'axios';
-import S3 from "aws-sdk/clients/s3";
-import { Credentials } from "aws-sdk";
+
 
 
 export default function CompanyAddModel({open,setopen,setallCompanies,setcompnies,setloading}) {
@@ -17,42 +16,51 @@ export default function CompanyAddModel({open,setopen,setallCompanies,setcompnie
 
     const [companydata,setcompanyData]=useState([])
     const [bankdata1,setbankData]=useState([])
+    const [accessKeys,setaccessKeys]=useState('');
+
+ 
 
 
- const access = new Credentials({
-  accessKeyId: "AKIA5UT2A32QWWX76HOF",
-  secretAccessKey: "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",
-});
-
-const s3 = new S3({
-  credentials: access,
-  region: "eu-west-1"
-});
 
 const Upload=async()=>{
-  const params = {
-    Bucket: "tth-cms1",
-    ACL: "public-read",
-    Key: `${file.name}`,
-    Body: file
-  };
-  try{
-  var s4=await s3.upload(params).promise();
-    console.log(s4)
-    return s4.Location
-  }
-  catch(err){
-    console.log(err);
-  }
+  const body={file}
+  const s4=await axios
+    .post("http://localhost:5000/uploadImage",body)
+    .then(res => {return res.data})
+    .catch(err => console.error(err));
+  console.log(s4)
+  debugger
+  // const access = new Credentials(accessKeys);
+  
+  // const s3 = new S3({
+  //   credentials: access,
+  //   region: "eu-west-1"
+  // });
+  // const params = {
+  //   Bucket: "tth-cms1",
+  //   ACL: "public-read",
+  //   Key: `${file.name}`,
+  //   Body: file
+  // };
+
+  // try{
+  // var s4=await s3.upload(params).promise();
+  //   console.log(s4)
+  //   return s4.Location
+  // }
+  // catch(err){
+  //   console.log(err);
+  // }
+  
 }
 
     const addNewCompany=async()=>{
         let companyAddress=JSON.parse(localStorage.getItem("companyAddress"))
         setopen(false);
         setloading(true);
-       if(file!==null)
-        var s=await Upload();
-      else s=null 
+      //  if(file!==null)
+      //   var s=await Upload();
+      // else s=null 
       const body={
         Cname:companydata.Cname,
         Ccountry:companyAddress.Ccountry,
@@ -64,7 +72,7 @@ const Upload=async()=>{
         address3:companyAddress.address3,
         CNumber:companydata.CNumber,
         county:companyAddress.county,
-        logo:s,
+        //logo:s,
         name:companydata.name,
         cpEmail:companydata.cpEmail,
         cpNumber:companydata.cpNumber,
@@ -72,7 +80,7 @@ const Upload=async()=>{
       }
      
         await axios
-          .post("https://spiretechs.co.uk:3000/company",body)
+          .post("http://54.90.48.129:5000/company",body)
           .then(res => {setcompnies(res.data);
                         setallCompanies(res.data);})
            .catch(err => console.error(err));

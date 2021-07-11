@@ -48,7 +48,7 @@ const addnewcontact=async()=>{
      
      dispatch(setContacts(contacts))
     let p=await axios
-      .post("https://spiretechs.co.uk:3000/contact",body)
+      .post("http://54.90.48.129:5000/contact",body)
       .then(res => {console.log(res.data); return res})
       .catch(err => console.error(err));
     setLoading(false)

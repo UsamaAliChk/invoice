@@ -46,11 +46,11 @@ const dispatch=useDispatch()
 const handelClick=async(id)=>{
     
      const company= await axios
-        .get(`https://spiretechs.co.uk:3000/company/${id}`)
+        .get(`http://54.90.48.129:5000/company/${id}`)
         .then(res => {return res.data})
         .catch(err => console.error(err));
       const contacts=await axios
-        .get(`https://spiretechs.co.uk:3000/contacts/${id}`)
+        .get(`http://54.90.48.129:5000/contacts/${id}`)
         .then(res => {return res.data})
         .catch(err => console.error(err));
     
@@ -86,10 +86,10 @@ const searchByName=(value)=>{
   const getCompanies=async()=>{
     dispatch(setCompany([]))
     const data= await axios
-      .get("https://spiretechs.co.uk:3000/companies")
+      .get("http://54.90.48.129:5000/companies")
       .then(res => {console.log(res.data); return res.data})
       .catch(err => console.error(err));
-      let invoices=await axios.get("https://spiretechs.co.uk:3000/getNoOfInvoices")
+      let invoices=await axios.get("http://54.90.48.129:5000/getNoOfInvoices")
       .then(res=>{return res.data})
       .catch(err=>console.log(err))
       localStorage.setItem("invoiceNo",(invoices.no_Of_invoices+1).toString());
@@ -146,6 +146,9 @@ const searchByName=(value)=>{
                   <tbody>
                   
                     {
+                      
+                      companies.length>0 ?
+
                       companies.map(e=>{
                         return (
                           <tr>
@@ -156,7 +159,9 @@ const searchByName=(value)=>{
                             <td className="editIcon" onClick={e1=>{editCompnay(e.companyId)}}><i class="far fa-edit"></i></td>
                         </tr>
                         )
-                      })
+                      }): <Card.Header>
+                      <Card.Title as="h4">NO COMPANY HAS BEEN FOUND</Card.Title>
+                    </Card.Header>
                     }
                   </tbody>
                 </Table>
