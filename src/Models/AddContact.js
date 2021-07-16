@@ -34,12 +34,12 @@ const addnewcontact=async()=>{
 
     
     let p=await axios
-      .post("http://52.87.255.127:5000/contact",body)
+      .post("http://18.204.10.41:5000/contact",body)
       .then(res => {console.log(res.data); return res})
       .catch(err => console.error(err));
     
   const cont=await axios
-      .get(`http://52.87.255.127:5000/contacts/${data[0].companyId}`)
+      .get(`http://18.204.10.41:5000/contacts/${data[0].companyId}`)
       .then(res => {return res.data})
       .catch(err => console.error(err));
 

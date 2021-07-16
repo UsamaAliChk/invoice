@@ -46,11 +46,11 @@ const dispatch=useDispatch()
 const handelClick=async(id)=>{
     
      const company= await axios
-        .get(`http://52.87.255.127:5000/company/${id}`)
+        .get(`http://18.204.10.41:5000/company/${id}`)
         .then(res => {return res.data})
         .catch(err => console.error(err));
       const contacts=await axios
-        .get(`http://52.87.255.127:5000/contacts/${id}`)
+        .get(`http://18.204.10.41:5000/contacts/${id}`)
         .then(res => {return res.data})
         .catch(err => console.error(err));
     
@@ -86,10 +86,10 @@ const searchByName=(value)=>{
   const getCompanies=async()=>{
     dispatch(setCompany([]))
     const data= await axios
-      .get("http://52.87.255.127:5000/companies")
+      .get("http://18.204.10.41:5000/companies")
       .then(res => {console.log(res.data); return res.data})
       .catch(err => console.error(err));
-      let invoices=await axios.get("http://52.87.255.127:5000/getNoOfInvoices")
+      let invoices=await axios.get("http://18.204.10.41:5000/getNoOfInvoices")
       .then(res=>{return res.data})
       .catch(err=>console.log(err))
       localStorage.setItem("invoiceNo",(invoices.no_Of_invoices+1).toString());

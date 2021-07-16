@@ -80,7 +80,7 @@ const Upload=async()=>{
       }
      
         await axios
-          .post("http://54.90.48.129:5000/company",body)
+          .post("http://18.204.10.41:5000/company",body)
           .then(res => {setcompnies(res.data);
                         setallCompanies(res.data);})
            .catch(err => console.error(err));

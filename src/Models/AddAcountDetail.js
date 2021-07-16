@@ -45,11 +45,11 @@ export default function AddAcountDetail({open,setopen,data,setLoading}) {
             }
             let id=data[0].companyId;
        const s= await axios
-          .post("http://54.90.48.129:5000/bankdetails",body)
+          .post("http://18.204.10.41:5000/bankdetails",body)
           .then(res => {console.log(res);return res})
           .catch(err => console.error(err));
         const company= await axios
-          .get(`http://54.90.48.129:5000/company/${id}`)
+          .get(`http://18.204.10.41:5000/company/${id}`)
           .then(res => {console.log("Hello Usama",res);return res.data})
           .catch(err => console.error(err));
           dispatch(setCompany(company));
