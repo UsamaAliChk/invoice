@@ -70,7 +70,7 @@ export default function EditUserAddress({setopen2,setEdit,open2,editContact,cont
                 <Modal show={open2} size='lg' style={{marginTop:"-200px",height:"1000px"}}>
                          <Modal.Body>
                             <Row className='modal-top'>
-                                <h4 style={{marginTop:'20px'}}>Contact Address</h4>
+                                <h4 style={{marginTop:'20px'}}>Bill To</h4>
                             </Row>
                             <Row style={{marginTop:"30px"}}>
                                 <Col md="5">

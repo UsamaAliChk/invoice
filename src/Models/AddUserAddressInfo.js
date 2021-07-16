@@ -71,7 +71,7 @@ export default function AddUserAddressInfo({setopen2,setIsOpen,open2,addnewconta
                         
                         <Modal.Body>
                             <Row className='modal-top'>
-                                <h4 style={{marginTop:'20px'}}>Contact Address</h4>
+                                <h4 style={{marginTop:'20px'}}>Bill To</h4>
                             </Row>
                             <Row style={{marginTop:"30px"}}>
                                 <Col md="5">

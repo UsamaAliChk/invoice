@@ -87,19 +87,19 @@ export default function EditCompnayInfo({open,setopen2,setopen,setcompanyData,co
                                 <Col md="7">
                                 <Row className="space-btw-inputs">
                                     <Col md="6">
-                                        <FormLabel>Name</FormLabel>
+                                        <FormLabel>Company Name</FormLabel>
                                         <FormControl id="Cname" type="text" onChange={handleChange} isValid={errors.Cname} isInvalid={!!errors.Cname} value={values.Cname}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.Cname}</Form.Control.Feedback>
                                     </Col>
                                     <Col md="6">
-                                        <FormLabel>Email</FormLabel>
+                                        <FormLabel>Company Email</FormLabel>
                                         <FormControl id="Cemail" autoComplete={false} type="text" isInvalid={!!errors.Cemail} isValid={errors.Cemail} value={values.Cemail} onChange={handleChange}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.Cemail}</Form.Control.Feedback>
                                     </Col>
                                 </Row>
                                 <Row className="space-btw-inputs">
                                     <Col md="6">
-                                        <FormLabel>Phone Number</FormLabel>
+                                        <FormLabel>Company Number</FormLabel>
                                         <FormControl id="CNumber" type="text" onChange={handleChange} isValid={errors.CNumber} isInvalid={!!errors.CNumber} value={values.CNumber}></FormControl>
                                         <Form.Control.Feedback type="invalid">{errors.CNumber}</Form.Control.Feedback>
                                     </Col> 
@@ -117,7 +117,7 @@ export default function EditCompnayInfo({open,setopen2,setopen,setcompanyData,co
                                     </Col>
                                             
                                             <Col md="6">
-                                                <FormLabel>Company Owner Number</FormLabel>
+                                                <FormLabel>Contact Number</FormLabel>
                                                 <FormControl id="cpNumber" autoComplete={false} type="text" isInvalid={!!errors.cpNumber} isValid={errors.name} value={values.cpNumber} onChange={handleChange}></FormControl>
                                                 <Form.Control.Feedback type="invalid">{errors.cpNumber}</Form.Control.Feedback>
                                             </Col>         

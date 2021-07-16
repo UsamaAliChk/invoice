@@ -27,7 +27,7 @@ function User() {
   const [Edit,setEdit]=useState(false)
   const data=useSelector(state=>state.getCompany);
   const contacts=useSelector(state=>state.getContacts);
-  if(data.length>0 && Loading===true) {setLoading(false); }
+  if(data.length>0 && Loading===true) {setLoading(false); } 
   const [contactData,setcontactData]=useState([]);
   const [id1,setid1]=useState('');
   
@@ -67,7 +67,7 @@ function User() {
                     <Row>
                     <Col className="pr-1" md="3">
                       <Form.Group>
-                        <label>Company</label>
+                        <label>Company Name</label>
                         <p>{data[0].companyName}</p>
                         {/* <Form.Control
                           defaultValue={data[0].companyName}
@@ -183,7 +183,7 @@ function User() {
                     </Row>
                   <Row >
                     <Col md="4">
-                      <Button style={{color:"black"}} onClick={e=>setopen(true)}>Update Company</Button>                    
+                      <Button style={{color:"black"}} onClick={e=>setopen(true)}>Add Bank Details</Button>                    
                     </Col>
                   </Row>
                 
@@ -270,9 +270,9 @@ function User() {
               <Col md='8'>
               <Card>
                   <Card.Header>
-                <Card.Title as="h4">Samways Contacts List</Card.Title>
+                <Card.Title as="h4">{data[0].companyName} Contacts List</Card.Title>
                 <p className="card-category">
-                  Here is a list of all contacts
+                  Here is a list of all billing contacts and other contacts
                 </p>
               </Card.Header>
                   <Card.Body>

@@ -73,7 +73,7 @@ export default function AddContactUserInfo({IsOpen,setIsOpen,setopen2,setuserInf
                 <Modal show={IsOpen} size='lg'  style={{marginTop:"-170px",height:"1000px"}}>
                         <Modal.Body>
                             <Row className='modal-top'>
-                                <h4 style={{marginTop:'20px'}}>Contact Information</h4>
+                                <h4 style={{marginTop:'20px'}}>Bill To</h4>
                             </Row>
                             <Row style={{marginTop:"30px"}}>
                                 <Col md="5">

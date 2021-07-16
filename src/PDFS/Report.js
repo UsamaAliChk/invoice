@@ -328,8 +328,7 @@ var style=StyleSheet.create({
     },
     userInfoBox:{
         display:'flex',
-        flexDirection:'row',
-        marginBottom:'30px'
+        flexDirection:'row'
 
     },
     userInfo:{
@@ -337,7 +336,6 @@ var style=StyleSheet.create({
         marginTop:'10px',
         fontSize:10,
         width:"270px",
-        height:'30px',
         fontFamily:'Lato'
     },
     userid:{
@@ -360,12 +358,11 @@ var style=StyleSheet.create({
         fontFamily:'Lato'
     },
     priceTitles:{
-        position:'relative',
         display:'flex',
         flexDirection:'row',
         backgroundColor:'#3973ac',
         height:22,
-        marginTop:'40px',
+        marginTop:'10px',
         width:'475px',
         color:'white',
         fontFamily:'Lato',

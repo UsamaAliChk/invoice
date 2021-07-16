@@ -73,7 +73,7 @@ export default function EditUserInfo({Edit,setEdit,setopen2,contactData,setuserI
                 <Modal show={Edit} size='lg' style={{marginTop:"-170px",height:"1000px"}}>
                     <Modal.Body>
                             <Row className='modal-top'>
-                                <h4 style={{marginTop:'20px'}}>Contact Information</h4>
+                                <h4 style={{marginTop:'20px'}}>Bill To</h4>
                             </Row>
                             <Row style={{marginTop:"30px"}}>
                                 <Col md="5">

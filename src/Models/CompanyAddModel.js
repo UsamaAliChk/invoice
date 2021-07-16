@@ -2,7 +2,7 @@
 //import { Button } from 'bootstrap';
 import React,{useState,useEffect} from 'react';
 import GetCompnayInfo from './GetCompnayInfo';
-import GetBankInfo from './GetBankInfo';
+import CompanyAddress from './CompanyAddress';
 
 import axios from 'axios';
 
@@ -94,7 +94,7 @@ const Upload=async()=>{
     return (
         <div>
          <GetCompnayInfo setcompanyData={setcompanyData} open={open} setopen2={setopen2} setopen={setopen}/>
-          <GetBankInfo setbankData={setbankData} setopen={setopen}  open2={open2} setfile={setfile} setopen2={setopen2} addNewCompany={addNewCompany}/>    
+          <CompanyAddress setbankData={setbankData} setopen={setopen}  open2={open2} setfile={setfile} setopen2={setopen2} addNewCompany={addNewCompany}/>    
         </div>
     )
 }

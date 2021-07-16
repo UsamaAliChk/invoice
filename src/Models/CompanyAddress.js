@@ -15,7 +15,7 @@ import {
     Modal,
      Form
   } from "react-bootstrap";
-export default function GetBankInfo({setbankData,setopen2,open2,addNewCompany,setfile,setopen}) {
+export default function CompanyAddress({setbankData,setopen2,open2,addNewCompany,setfile,setopen}) {
 
     const valScheema=Yup.object({
         

@@ -13,7 +13,7 @@ const [open2,setopen2]=useState(false);
 
 const addnewcontact=async()=>{ 
     setIsOpen(false);
-    setLoading(true);
+    setLoading(false);
     let addressInfo=JSON.parse(localStorage.getItem("userAddressInfo"));
     const body={id:data[0].companyId,
     title:userInfo.title,
@@ -32,26 +32,35 @@ const addnewcontact=async()=>{
     county:addressInfo.county}
 
 
-   contacts.push({title:userInfo.title,
-    firstName:userInfo.first,
-    lastName:userInfo.last,
-    contactEmail:userInfo.Cemail,
-    Country:addressInfo.Ccountry,
-    contactPhoneNumber:userInfo.CNumber,
-    Address1:addressInfo.address1,
-     Address2:addressInfo.address2,
-     Address3:addressInfo.address3,
-     Town:addressInfo.town,
-     County:addressInfo.county,
-     contactType:userInfo.contactType,
-     postalCode:addressInfo.postalcode});
-     
-     dispatch(setContacts(contacts))
+    
     let p=await axios
-      .post("http://54.90.48.129:5000/contact",body)
+      .post("http://52.87.255.127:5000/contact",body)
       .then(res => {console.log(res.data); return res})
       .catch(err => console.error(err));
-    setLoading(false)
+    
+  const cont=await axios
+      .get(`http://52.87.255.127:5000/contacts/${data[0].companyId}`)
+      .then(res => {return res.data})
+      .catch(err => console.error(err));
+
+  contacts.push({title:userInfo.title,
+        firstName:userInfo.first,
+        lastName:userInfo.last,
+        contactEmail:userInfo.Cemail,
+        companyName:userInfo.companyName,
+        Country:addressInfo.Ccountry,
+        contactPhoneNumber:userInfo.CNumber,
+        Address1:addressInfo.address1,
+         Address2:addressInfo.address2,
+         Address3:addressInfo.address3,
+         Town:addressInfo.town,
+         County:addressInfo.county,
+         contactType:userInfo.contactType,
+         postalCode:addressInfo.postalcode});
+
+      await dispatch(setContacts(cont))
+    
+    setLoading(true)
     setuserInfo('');
   }
 

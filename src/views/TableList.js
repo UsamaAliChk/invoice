@@ -46,11 +46,11 @@ const dispatch=useDispatch()
 const handelClick=async(id)=>{
     
      const company= await axios
-        .get(`http://54.90.48.129:5000/company/${id}`)
+        .get(`http://52.87.255.127:5000/company/${id}`)
         .then(res => {return res.data})
         .catch(err => console.error(err));
       const contacts=await axios
-        .get(`http://54.90.48.129:5000/contacts/${id}`)
+        .get(`http://52.87.255.127:5000/contacts/${id}`)
         .then(res => {return res.data})
         .catch(err => console.error(err));
     
@@ -86,10 +86,10 @@ const searchByName=(value)=>{
   const getCompanies=async()=>{
     dispatch(setCompany([]))
     const data= await axios
-      .get("http://54.90.48.129:5000/companies")
+      .get("http://52.87.255.127:5000/companies")
       .then(res => {console.log(res.data); return res.data})
       .catch(err => console.error(err));
-      let invoices=await axios.get("http://54.90.48.129:5000/getNoOfInvoices")
+      let invoices=await axios.get("http://52.87.255.127:5000/getNoOfInvoices")
       .then(res=>{return res.data})
       .catch(err=>console.log(err))
       localStorage.setItem("invoiceNo",(invoices.no_Of_invoices+1).toString());
@@ -128,12 +128,12 @@ const searchByName=(value)=>{
               <Card.Body className="table-full-width table-responsive px-0">
               <Row style={{marginLeft:'2px',marginBottom:'10px'}}>
                 <Col md="4">
-                  <FormLabel>Company Name</FormLabel>
-                  <FormControl onChange={e=>searchByName(e.target.value)} type="text"></FormControl>
+                  <FormLabel>Search By Company Name</FormLabel>
+                  <FormControl onChange={e=>searchByName(e.target.value)} type="text" placeholder="Company Name"></FormControl>
                 </Col>
                 <Col md="4">
-                  <FormLabel>Country Name</FormLabel>
-                  <FormControl onChange={e=>searchByCountry(e.target.value)} type="text"></FormControl>
+                <FormLabel>Search By Country Name</FormLabel>
+                  <FormControl onChange={e=>searchByCountry(e.target.value)} type="text" placeholder="Country Name"></FormControl>
                 </Col>
                 <Col>
                   <Button onClick={e=>{setIsOpen(true); console.log(IsOpen)}} style={{marginTop:"25px",height:'40px'}}>ADD COMPANY</Button>
