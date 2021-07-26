@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux'
 import Report from '../PDFS/Report'
 import Pdf2 from '../PDFS/Pdf2'
 import Pdf from '../PDFS/Pdf';
+import DataFlate from '../PDFS/DataFlate'
 import {
     Button,Row,Col
   } from "react-bootstrap";
@@ -82,6 +83,13 @@ export default function PDFView() {
 
 
     const openpdf = async () => {
+      if(type==='4'){
+        let blob= await pdf(
+            <DataFlate Data={data}/>
+          ).toBlob()
+          setpdfLink(window.URL.createObjectURL(blob));
+          setpdfBlob(blob);
+    }
         if(type==='3'){
             let blob= await pdf(
                 <Report Data={data}/>

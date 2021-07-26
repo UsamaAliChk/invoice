@@ -29,7 +29,7 @@ const [tax,settax]=useState(0);
 const [dueDate,setdueDate]=useState('');
 const canAdd=description.length>0 && qty!==0 && price!==0;
 const isEnabled=canAdd && selectedMemberId!==''
-
+const [month,setmonths]=useState(1);
 
 
 
@@ -109,6 +109,18 @@ const handelClick=async()=>{
   else{
     bankInfo.sortCode=null
   }
+  if(selectedCompany[0].swiftCode!==null){
+    bankInfo.swiftCode=selectedCompany[0].swiftCode;
+  }
+  else{
+    bankInfo.swiftCode=null
+  }
+  if(selectedCompany[0].accountName!==null){
+    bankInfo.accountName=selectedCompany[0].accountName;
+  }
+  else{
+    bankInfo.accountName=null
+  }
   // if(selectedCompany[0].accountName!==null){
   //     bankInfo.push(selectedCompany[0].accountName);
   // }
@@ -183,7 +195,7 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
               <ShowList items={items} tax={tax} setitems={setitems} total={totalPrice} settotalPrice={settotalPrice} settax={settax} vat={selectedCompany[0].vat}/>
 
               <Row>
-                <Col md="6">
+                <Col md="4">
                 
                     <Form.Label>Description</Form.Label>
                     <Form.Control as="textarea" rows={3} type="text" onChange={e=>{setdescription(e.target.value);}} >
@@ -206,6 +218,18 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                   </Form.Control>
                 </Col>
                 <Col md="2">
+                  <Form.Label>Months</Form.Label>
+                <Form.Control as="select" onChange={(e)=>{let val=parseInt(e.target.value);setmonths(val)}}>
+                      <option>Select Months</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                  </Form.Control>
+                </Col>
+                <Col md="2">
                     <Form.Label>Price</Form.Label>
                     <Form.Control type="text" onChange={(e)=>{let value=parseInt(e.target.value) ;setprice(value)}}></Form.Control>
                 </Col>
@@ -213,11 +237,11 @@ const styles = {textAlign: 'center', fontSize: '26px', color: '#ff9900', positio
                     <Button style={{marginTop:"30px",color:"black"}} onClick={e=>{
                       let s5=0
                       if(!isNaN(qty)){
-                      let total=qty*price;
+                      let total=(qty*price)*month;
                       let total2=totalPrice+total;
                       s5=total2
                       settotalPrice(total2); 
-                      setitems(old=>[...old,{description,qty,price,total,id:Math.random()}])}
+                      setitems(old=>[...old,{description,qty,price,total,id:Math.random(),month}])}
                       else{
                         setitems(old=>[...old,{description,qty:0,price:0,total:0,id:Math.random()}])
                       }
